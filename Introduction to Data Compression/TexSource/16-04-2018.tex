@@ -1,4 +1,17 @@
-        COMPRESSION DE DONNEES
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\title{}
+\author{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{COMPRESSION DE DONNEES}
 
 site slides : www.lrde.epita.fr/~gtochon/CODO
 
@@ -22,7 +35,7 @@ visible possible par l'utilisateur.
 
 ---
 
-# On data compressebility
+\subsection{On data compressebility} 
 
 On va chercher a eliminer les redondances, et les gaspillages.
 L'outil que l'on va utiliser est l'entropie.
@@ -32,60 +45,79 @@ contenir d'informations.
 
 ---
 
-Prnons un alphabet de N symboles
+Prenons un alphabet de N symboles
 $$ \sum = \{s_{1},s_{2} s_{N}\} $$
 
-de probabilite  p(s_{1}  = proba (le symbole s_{i} apparait)
-  N valeurs de proba P_{1'} ... P_{N} avec $$ \sum P_{i} = 1 $$
+de probabilite  $ p(s_{1})  = $ proba (le symbole  $s_{i}$ apparait)
+  N valeurs de proba $$P_{1'} ... P_{N}$$ avec $ \sum P_{i} = 1 $
 
-F un  fichier construit sur cet alphabet $$ \sum $$ / distribution de proba 
-(P_{1} , P_{N1})
-  -> qte d'information totale du symbole s_{i} -> = -log_{2}(P_{1})
+F un  fichier construit sur cet alphabet $ \sum $/ distribution de proba 
+$(P_{1} , P_{N1})$
+  -> qte d'information totale du symbole$ s_{i} = -log_{2}(P_{1})$
 
-F contient N_{F} symboles -> S_{i} est statiquement present N_{F}P_{i} 
+F contient $N_{F}$ symboles -> $S_{i} $est statiquement present $N_{F}P_{i} $
 
+$$
 Q_{Tot}(S_{i}) = - N_{FP_{i}} Sh
-
+$$ $$
 Q_Tot(F) = Q_{Tot}(S_{1}) + Q_{Tot}(S_{2}) + ... + Q_{Tot}(S{N_{2}})
-
+$$ $$
 Q_{Tot}(S_{1}) = -N_{F}log_{2}(P_{i})
-
+$$ $$
 Q_{Tot}(S_{2}) = -N_{FP_{2}}log_{2}(P_{2})
-
+$$ $$
 Q_{Tot}(S{N_{2}}) = -N_{F}P_{N}log_{2}(P_{N})
-
+$$ $$
 Q_{Tot}(F) =  \sum -N_{FP_{i}}
 = -N_{F} \sum P_{i}log_{2}(P_{i}) Sh
+$$
 
 Un gros fichier "probable" contient plus d'info qu un petit fichier "improbable"
-
-Q_{Tot} -> Sh
+$
+Q_{Tot} $ -> Sh
 
 -> H -> Sh/Symbole
-
-H = - \sum P_{i}log_{2}(P_{i}) -> ne depend pas du fichier considere, mais uniquement
+$
+H = - \sum P_{i}log_{2}(P_{i})$ -> ne depend pas du fichier considere, mais uniquement
 de la distribution de proba des symboles composant le fichier.
 
----
 
-X variable aleatoire de valeur $$ \{ x_{1}, x_{2} ... x_{n} $$
--> P_{i} = P(X = x) \sum P_{i} = 1
 
-$$
+$X$ variable aleatoire de valeur $ \{ x_{1}, x_{2} ... x_{n} $
+-> $P_{i} = P(X = x) \sum P_{i} = 1$
+
+$
 E[X] = \sum_{i=1}^{N} x_{1} P(X = x_{i}) = \sum_{i = 1}^{N} x_{i} P_{i}
-
+$ $
 E[\phi (X)] = \sum_{i=1}^{N} \phi (x_{i})P_{i}
-
+$ $
 H= - \sum_{i= 1}^{N}P_{i}log_{2}P_{i} = \sum_{i = 1}^{N} (-log_{2}(Pi)) P_{i} = \sum_{i = 1}^{N}q_{S_{i} * P_{i}}
 H = E[q(s_{i})]
-$$
----
-$$
+$ $
 \sum = {0,1} P(0) = P_{0} = P
              P(1) = P_{1} = 1 - P
+$ $
 H = -p log_{2}(p) - (1 - p) log_{2}(1 - p)
   = H(p)
+$
 
+---
+Missing things
+---
+
+
+
+$\sum$ avec$ N $symboles $s_{i}, i = 1, .. N$
+                                 $   (2^{n})$
 $$
+P(S_{i}) = \frac{1}{N_{\sum}} = \frac{1}{ 2^{n}}$$
+$$
+H = - \sum_{i = 1}^{N\sum} log_{2}(P_{i}) = - \sum_{i = 1}^{2^{n}}
+  = -\sum_{i = 1}^{2^{n}} \frac{1}{2^{n}} log_{2} (\frac{1}{ 2_{n}}))
+  = \frac{1}{ 2_{n}} * (-n) * \sum_{i = 1}^{2^{n}} * \sum_{i = 1}^{2^{n}} 1  
+  = n2^{n}@^{-n} = n $$     (Sh/Symbole)
 
 
+\section{}
+
+\end{document}
