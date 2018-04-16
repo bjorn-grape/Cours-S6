@@ -2,27 +2,18 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-\usepackage[french]{babel}
-\usepackage{hyperref}
 
-
-\title{Compression}
+\title{}
 \author{}
 
 \begin{document}
 
 \maketitle
 \tableofcontents
-\newpage
-\hypersetup {
-linkcolor=blue,
-filecolor=magenta,
-urlcolor=cyan
-citecolor=blue}
 
 \section{COMPRESSION DE DONNEES}
 
-site slides : \url{www.lrde.epita.fr/~gtochon/CODO/}
+site slides : www.lrde.epita.fr/~gtochon/CODO
 
 Compression + decompression
 
@@ -62,9 +53,9 @@ de probabilite  $ p(s_{1})  = $ proba (le symbole  $s_{i}$ apparait)
 
 F un  fichier construit sur cet alphabet $ \sum $/ distribution de proba 
 $(P_{1} , P_{N1})$
-  $\rightarrow$ qte d'information totale du symbole$ s_{i} = -log_{2}(P_{1})$
+  -> qte d'information totale du symbole$ s_{i} = -log_{2}(P_{1})$
 
-F contient $N_{F}$ symboles $\rightarrow S_{i} $est statiquement present $N_{F}P_{i} $
+F contient $N_{F}$ symboles -> $S_{i} $est statiquement present $N_{F}P_{i} $
 
 $$
 Q_{Tot}(S_{i}) = - N_{FP_{i}} Sh
@@ -83,17 +74,17 @@ $$
 
 Un gros fichier "probable" contient plus d'info qu un petit fichier "improbable"
 $
-Q_{Tot} $ $\rightarrow$ Sh
+Q_{Tot} $ -> Sh
 
-$\rightarrow$ H $\rightarrow$ Sh/Symbole
+-> H -> Sh/Symbole
 $
-H = - \sum P_{i}log_{2}(P_{i})$ $\rightarrow$ ne depend pas du fichier considere, mais uniquement
+H = - \sum P_{i}log_{2}(P_{i})$ -> ne depend pas du fichier considere, mais uniquement
 de la distribution de proba des symboles composant le fichier.
 
 
 
 $X$ variable aleatoire de valeur $ \{ x_{1}, x_{2} ... x_{n} $
-$\rightarrow$ $P_{i} = P(X = x) \sum P_{i} = 1$
+-> $P_{i} = P(X = x) \sum P_{i} = 1$
 
 $
 E[X] = \sum_{i=1}^{N} x_{1} P(X = x_{i}) = \sum_{i = 1}^{N} x_{i} P_{i}
@@ -124,7 +115,9 @@ $$
 H = - \sum_{i = 1}^{N\sum} log_{2}(P_{i}) = - \sum_{i = 1}^{2^{n}}
   = -\sum_{i = 1}^{2^{n}} \frac{1}{2^{n}} log_{2} (\frac{1}{ 2_{n}}))
   = \frac{1}{ 2_{n}} * (-n) * \sum_{i = 1}^{2^{n}} * \sum_{i = 1}^{2^{n}} 1  
-  = n2^{n}2^{-n} = n $$     (Sh/Symbole)
+  = n2^{n}@^{-n} = n $$     (Sh/Symbole)
 
+
+\section{}
 
 \end{document}
