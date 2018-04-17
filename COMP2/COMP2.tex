@@ -2,7 +2,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-
+\usepackage{hyperref}
 \title{COMP2}
 \author{}
 
@@ -54,5 +54,25 @@ Le langage intermediaire va s'executer en utilisant soit des registres, soit la 
 \subsection{Langage impur/ langage pur}
 Dans un langage impur, on va avoir des effets de bord. Donc le retour de la fonction appelee est cast en void.
 Dans un langage pur, cette fonction ne peut pas exister.
+
+\subsection{Pourquoi s'executer dans un registre ?}
+
+Pour avoir des performances optimales.\\
+Cependant le nombre de registres est limite.\\
+Dans l'ideal il faudrait utiliser uniquement les registres.\\
+En cas de manque de registre on peut utiliser les caches L1 et L2.\\
+Ou la RAM.\\
+Ou le disque.\\
+
+Cependant plus l'on descend dans cette liste , plus l'execution va etre lente.\\
+
+Pour les registres, l'ordre des arguments que l'on va passer dans les registres ne doit pas etre neglige. C'est le fondateur du langage qui decide de cette organisation.\\
+
+\subsection{Actions sur la Pile}
+Rappel du cours d'assembleur:\\
+On va sauvegarder fp (frame ptr) et sp (stack ptr) dans la stack pour pouvoir les restaurer a la fin des appels de fonction.\\
+Regle a respecter : je n'ai pas le droit d'acceder a de la memoire en dehors de ma frame, je peux cependant l'aggrandir.\\
+
+
 
 \end{document}
