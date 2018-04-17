@@ -110,3 +110,7 @@ ENV/
 *.syntex.gz
 *.toc
 *.synctex.gz
+
+# Swap files
+*~
+*.swp
