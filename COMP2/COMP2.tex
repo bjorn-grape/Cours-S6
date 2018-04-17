@@ -1,0 +1,58 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\title{COMP2}
+\author{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section*{Review Partiel}
+
+Difficultes sur regle d'inference. (Revoir les regles d'inference sur les types)\\\\
+ebreak(\texttt{f()}) , si \texttt{f() = readint()} alors c'est impossible de binder  a la compilation.\\\\
+Coercission  aggrandissante, on stocke la variable dans un champs contenant plus de bits.\\
+Coercission retrecissante, on stocke la variable dans un champs contenant moins de bit, Avec de la perte d'info.
+
+\section{Langage intermediaire}
+
+\subsection{Pourquoi langage intermediaire ?}
+Reduire la quantite de code a ecrire, et les duplications de code.\\\\
+Il faut trouver un point de convergence entre differents langage afin de produire  un langage intermediaire.\\
+Soit on le rapproche de la partie assembleur, soit on le rapproche des langages de plus haut niveau.\\
+
+On a 4 etapes pour faire un compilateur :\\
+- FrontEnd\\
+- HIR (High Level Representation)\\
+- LIR (Low Level Representation)\\
+- Backend\\
+
+Si on veut faire des optimisations, il faut les faire entre HIR et LIR, ainsi, cela profitera a tous les langages et tous les backends.\\
+
+\subsection{Comment savoir quand on est dans la representation intermediaire ?}
+A  partir du moment ou le langage intermediaire est defini, on peut le savoir.\\
+Il faut s'assurer que notre traduction est correcte. Dans ce cas la le pretty printer est utile.
+Il y  a differentes manieres de faire la representation intermediaire:\\
+- fonctionelle\\
+- imperative\\
+
+Cela depend des langages a traduire.
+
+\subsection{GCC}\hfill \break
+GCC traduit differents langages vers GENERIC qui est un premier langage intermediaire.\\
+Apres il simplifie avec gsimplifier.\\
+Apres il ne va avoir que des variables constantes. Donc beaucoup plus de variable mais avec un temps de vie plus petit.\\
+
+\subsection{Stack ou Registre}
+Le langage intermediaire va s'executer en utilisant soit des registres, soit la stack.
+
+\subsection{Langage impur/ langage pur}
+Dans un langage impur, on va avoir des effets de bord. Donc le retour de la fonction appelee est cast en void.
+Dans un langage pur, cette fonction ne peut pas exister.
+
+\end{document}
