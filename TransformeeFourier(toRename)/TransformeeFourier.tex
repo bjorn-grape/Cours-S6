@@ -1,0 +1,213 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+
+% Defining sane commands for euros.
+\usepackage{textcomp}
+\newcommand{\euro}{\texteuro}
+
+% Page format.
+\usepackage{geometry}
+\geometry{top=2cm, bottom=2cm, left=1cm, right=1cm}
+
+% Figures.
+\usepackage{graphicx}
+\graphicspath{{resources/}}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz}
+
+\usepackage{amsmath,amsfonts,amssymb}
+
+
+% Links. Should be loaded last.
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+            linkcolor=blue,
+            filecolor=magenta,
+            urlcolor=cyan,
+            citecolor=blue}
+
+
+
+\title{Transformee Fourier}
+\author{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Historique}
+
+Dans la musique, on peut retrouver des gammes 'non-dissonantes'.\\
+Les instruments etaient accordes a l'oreille avec une note de base.\\
+Cela creait des dissonnances.\\
+
+\section{Introduction}
+Peut on obtenir un signal elementaire avec des signaux elementaire ?\\
+
+On va s'interesser aux conditions qui font qu'un signal est compose de signaux elementaires.
+
+\begin{align*}
+f(t)  \\
+        f   ('periode')  2\pi \\
+\end{align*}
+
+\subsection{Definition}
+
+\begin{align*}
+  e^{\alpha z}   (derivee) &\rightarrow \alpha e^{\alpha z}\\
+  e^{\alpha z} (primitive) &\rightarrow \frac{1}{\alpha} * e^{\alpha z}\\
+\end{align*}
+
+\begin{align*}
+  g(t) &= \sum_{k \in Z} e_{n}e^{int}\\
+  \int_{0}^{2\pi} g(t)e^{-int} dt &= \int_{0}^{2x} \sum_{m \in Z} e_m e^{imt} e^{imt} dt \\
+  &= \sum_{m \in Z} c_m \int_{0}^{2\pi} e^{i(m - n)t} dt\\
+  &= c_n \int_{0}^{2\pi} + \sum_{m \neq n} e^{i(m-n)t} dt \\
+  &= 2\pi c_n + 0
+\end{align*}
+
+\begin{align*}
+  c_n = \frac{1}{2\pi} \int_0^{2\pi} g(t) e^{-int} dt
+\end{align*}
+\subsection{Definition 2}
+Une fonction periodique est une somme de fonction elementaires.
+
+\newpage
+\subsection{Definition 3}
+Prenons $f$ de periode $2\pi$\\
+La serie de Fourier de $f$ est :\\
+
+\begin{align*}
+b_0 + \sum_{n = 1 }^{\inf} b_n  \cos(nt) + \sum_{n = 1}^{\inf} a_n \sin(nt)\\
+\sum_{n \in Z} c_n e^{int}\\
+\end{align*}
+
+\begin{align*}
+  b_0 &= \frac{1}{2\pi} \int_{0}^{2\pi} f(t) dt\\
+  b_n &= \frac{1}{\pi} \int_{0}^{2\pi} f(t) \cos(nt)dt\\
+  a_n &= \frac{1}{\pi} \int_0^{2\pi} f(t)\sin(nt) dt\\
+  c_n &= \frac{1}{2\pi} f(t) e^{-int} dt
+\end{align*}
+$n > 0$ \\
+\begin{align*}
+  c_n &= \frac{b_n + i a_n}{2}\\
+   c_{-n} &= \frac{b_n - i a_n}{2}\\
+  \end{align*}
+   $n = 0$\\
+  \begin{align*}
+ c_0 &= b_0
+\end{align*}
+
+$f$ a valeur nulle.\\
+$a_n$ et $b_n$ reels\\
+
+$f$ est paire\\
+$ \forall a_n = 0$\\
+$f$ est impaire\\
+$\forall b_n = 0$\\
+
+Ensemble de fonctions periodiques :\\
+- continue\\
+- continent derivable\\
+- Integrale\\
+- "Pas trop de  discontinuite"\\
+- ...\\
+
+Un ensemble $E$ choisi.\\
+Espace vectoriel.\\
+$f$ et $g \in $ E\\
+$\alpha_1 \beta \in C$\\
+$\alpha f + \beta g \in E$\\
+
+\begin{align*}
+  <f,g> &= \frac{1}{2\pi} \int f(t) \overline{g}(t) dt\\
+\end{align*}
+
+\begin{align*}
+<f,g> &= \frac{1}{2\pi} \int f\overline{f}(t) dt\\
+      &= \frac{1}{2\pi} \int |f|^2 dt
+\end{align*}
+ressemble a $||f||^2$
+
+\begin{align*}
+  <e^{int},e^{int} > &= 0\\
+\end{align*}
+ $n \neq m$\\
+ \begin{align*}
+   <e^{int},e^{imt}> &= 1\\
+ \end{align*}
+ 
+ \begin{align*}
+\sum_{n \in Z} < f,e^{in}> e^{int}\\   
+ \end{align*}
+
+En dimension 3,$ e_1, e_2, e_3 $etant des espaces vectoriels, on peut exprimer $u(x,y,z)$, tq:\\
+$u = (u.e_1)e_1 + (u.e_2)e_2 + (u.e_3)e_3$\\
+
+\section{Convergence}
+
+\subsection{Theoreme}
+f  classe $C^2$\\
+Convergence\\
+$f(t) = \sum c_n e^{int}$\\
+
+Fonction "reguliere par morceau"\\
+- Un nombre fini de discontinuites\\
+- nombre fini d'extrema\\
+
+Si $f$ continu en $t$ ; $f(t) = \sum c_{n} e^{int}$\\
+Si $f$ discontinu en $t$ : $\sum c_n e^{int} = (\frac{1}{2} (f(t-) + f(t+)))$\\
+
+\subsection{Phenomene de Gibbs.}
+
+\subsubsection{Integration et derivation}
+\begin{align*}
+ \sum_a^b e^{int} dt &= (b - a) c_0 + \sum_{n \neq 0} C_n \int_a^b e^{int} dt\\
+ &= (b - a) c_0 + \sum_{n \neq 0 } \frac{C_n}{in} (e^{inb} - e^{ina}) 
+\end{align*}
+
+Pour la derivation:\\
+Hypothese $f$ continu derivable\\
+$f'$ regulier par morceaux\\
+\begin{align*}
+  \sum inc_n e^{int} &= f'(t) ... continue\\
+&=\frac{1}{2} (f'(t+)+ f'(t-)) ... discontinue
+\end{align*}
+
+\subsubsection{Exemple}
+
+\begin{align*}
+  f(t) = 1 si t \in ]-a, +a[\\
+        0 ailleurs sur [-\pi,\pi]\\
+        ...\\
+        f(t) = \frac{a}{\pi} + \frac{2}{\pi} \sum_{n = 1}^{\inf} \frac{\sin(n a)}{n} cos(nt)\\
+\end{align*}
+
+\subsubsection{Cas particulier}
+\begin{align*}
+f(t) &= \frac{1}{2} + \frac{2}{\pi}\sum_{R = 0}^{\inf} \frac{(-1)^k}{2k + 1} \cos{(2k +1) }t  \\
+f(t) &= \frac{1}{2} + \frac{2}{\pi} \sum_{k = 0}^{\inf} \frac{1}{2k =1} \sin((2k +1)t)\\
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
