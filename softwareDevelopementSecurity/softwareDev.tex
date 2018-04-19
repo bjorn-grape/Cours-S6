@@ -22,11 +22,8 @@
 \usepackage{array}
 \usepackage{tikz}
 
-% Math and chemistry.
-
-
-
-
+% Source code
+\usepackage{minted}
 
 % Links. Should be loaded last.
 \usepackage{hyperref}
@@ -39,7 +36,7 @@
 
 
 \title{Software Development Security}
-\author{}
+\author{Marc ESPIE}
 
 \begin{document}
 
@@ -48,6 +45,8 @@
 \newpage
 
 \section{BASIC Security}
+
+One can get the slides at \url{https://www.lse.epita.fr/teaching/courses.html}
 
 \subsection{Introduction}
 \subsubsection{Perpectives}
@@ -80,7 +79,7 @@ Simple questions for the exam:\\
 
 Adanced Questions:\\
 - There will be source code and sample audits\\
-- It won't be 100% clean\\
+- It won't be 100\% clean\\
 - It won't be exactly like 'epita standard code'\\
 - If it's different it may not be wrong\\
 - Beware of wrong asssumptions\\
@@ -279,18 +278,73 @@ Interger overflow => undefined behavior\\
 \
 You have to check th size of max integer depending on your CPU.\\
 
+Broken code:
+
+\begin{minted}{c}
+  int *
+  alloc_array(int n)
+  {
+    int *t = emalloc(n * sizeof(int));
+    return t;
+  } 
+  int * 
+  read_array() 
+  { 
+    int s = 0; 
+    scanf("%d", &s); 
+    if (s == 0) 
+    exit(1); 
+    int *t = alloc_array(s); 
+    for (int i = 0; i != s; i++) 
+    scanf("%d", t[i]); 
+    return t; 
+  }
+\end{minted}
+
+Good practices:
+
+\begin{itemize}
+\item Use calloc. Make sure that it is safe.
+\item Maybe craft you own.
+\end{itemize}
 
 \subsection{SQL injection}
+In SQL, never use do.
+
 Don't assume the people you work with know about this.\\
 Never do matching about negative patterns.\\
 ie : Some patterns can be added later, and so you won't be protected anymore.\\
 
 You should accept the less things you can, and open more things when people ask you to do it. In order to avoid security leaks.
 
+\subsection{More about quoting}
+
+What you don't know will kill you
+
+Never do matching against negative patterns
+
+e.g., an email address is not something that does not contain some characters
+
+Is is something that only matches a given pattern.
+
+(Subsidiary question: figure out a regexp that matches email)
+
+\
+
+Do positive matching.
+
 \subsection{Printf}
 What you don't know will kill you.\\
 Printf can print part of memories that you don't want to share.\\
 Beware of executing shell commands from user or asking for paths.\\
+
+Always write printf("\%s", msg);
+
+The compiler will optimize it.
+
+\subsection{Forgotten shells}
+
+Every time one launches system or popen, a shell is run.
 
 \subsection{Services}
 When a service crash, what do you do ?\\
