@@ -1,7 +1,42 @@
 \documentclass[a4paper,11pt]{article}
+
+
+% Standart.
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
+\usepackage[french]{babel}
+
+% Defining sane commands for euros.
+\usepackage{textcomp}
+\newcommand{\euro}{\texteuro}
+
+% Page format.
+\usepackage{geometry}
+\geometry{top=2cm, bottom=2cm, left=1cm, right=1cm}
+
+% Figures.
+\usepackage{graphicx}
+\graphicspath{{resources/}}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz}
+
+% Math and chemistry.
+
+
+
+
+
+% Links. Should be loaded last.
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+            linkcolor=blue,
+            filecolor=magenta,
+            urlcolor=cyan,
+            citecolor=blue}
+
+
 
 \title{Software Development Security}
 \author{}
@@ -177,14 +212,12 @@ You want to avoid the 'sweep under the carpet effect'\\
 If you do open source, some people will look at what you are doing.\\
 
 example:\\
-
+\
 A guy recovered most patterns of buffer overflow from microsoft windows.\\
-
-
-
+\
 It takes one bug...\\
 Everything is exploitable.\\
-
+\
 You have to carefully check the code that you have been writting.\\
 
 
@@ -195,7 +228,7 @@ You have to carefully check the code that you have been writting.\\
 \subsection{Avoiding bug exploit}
 \subsubsection{Mitigation}
 In OS, it's an actual technique that will mitigate it.\\
-
+\
 example : canaries\\
 Function prolog will insert random data on the stack.\\
 This will be checked at the end of the function, if it has changed then, stack smash if called to make program end.\\
@@ -216,19 +249,65 @@ prefer strlcpy, strlcat; so you can use the size to see if it will fit.\\
 - 'But I don't write wrong code'\\
 - The reason for slow adoption of strlcpy\\
 For over 10 year Mr Drepper didn't wanted to introduce strlcpy on linux, because people had to write good stuff.\\
-
+\
 Prefer snprint to sprintf.\\
 When writing code in C, the size have to be obvious.\\
-
-
+\
 90\% of all software is:\\
 - crap\\
 - unimportant to optimize\\
 - etc...\\
-
+\
 You can't fix everything\\
 ... therefore don't fix everything\\
 This produces "Low-Hanging fruits"\\
 As long as you avoid basic bugs, you're safe from most pirates. (95\% of them)\\
+
+\section{Unsecure programs}
+\subsection{Buffer Overflow}
+Be carefull with malloc overflows.\\
+The programm opening an image can be vulnerable to overflows.\\
+\
+ie: flash with buffer overflows. If you did the right overflow, you could have get more rights than you should have had.\\
+\
+You have to write correctly your library so it is fast and safe.\\
+\
+Beware of undefined behaviors and compiler optimizations.\\
+\
+When working with arrays in C, you want to check the size.\\
+Interger overflow => undefined behavior\\
+\
+You have to check th size of max integer depending on your CPU.\\
+
+
+\subsection{SQL injection}
+Don't assume the people you work with know about this.\\
+Never do matching about negative patterns.\\
+ie : Some patterns can be added later, and so you won't be protected anymore.\\
+
+You should accept the less things you can, and open more things when people ask you to do it. In order to avoid security leaks.
+
+\subsection{Printf}
+What you don't know will kill you.\\
+Printf can print part of memories that you don't want to share.\\
+Beware of executing shell commands from user or asking for paths.\\
+
+\subsection{Services}
+When a service crash, what do you do ?\\
+-restart service\\
+-don't restart it\\
+
+The good idea is not to restart it yet, and look at the logs.\\
+So you can know where is the problem.\\
+There may be attackers.\\
+
+If you  have a system that gives you notifications or warning messages, you have to use them.\\
+\
+You should try to attack your owns servers, and make them fail, in order to be sure they fail for the good reasons.\\
+\
+Make sure that you verify regularly that things can fail.\\
+\
+Netflix had some of the same issues, it was client of AWS.\\
+\url{https://www.lemondeinformatique.fr/actualites/lire-netflix-libere-chaos-monkey-dans-la-jungle-open-source-49940.html}
 
 \end{document}
