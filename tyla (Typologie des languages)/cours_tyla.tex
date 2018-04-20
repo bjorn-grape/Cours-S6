@@ -1,0 +1,242 @@
+\documentclass[a4paper,11pt]{article}
+
+% Standart.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage{eurosym}
+
+% Page format.
+\usepackage{geometry}
+\geometry{top=2cm, bottom=2cm, left=1cm, right=1cm}
+
+% Figures.
+\usepackage{graphicx}
+\graphicspath{{resources/}}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz}
+
+% Math and chemistry.
+\usepackage{chemist}
+\usepackage{siunitx}
+\usepackage{numprint}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+
+% Links. Should be loaded last.
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+            linkcolor=blue,
+            filecolor=magenta,
+            urlcolor=cyan,
+            citecolor=blue}
+
+
+% Useful environment
+\newenvironment*{dummyenvironment}{}{}
+
+% Custom commands
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\der}{\,\mathrm{d}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ti}{\cdot}
+
+\title{Typologie des languages}
+\author{Étienne RENAULT}
+\date{20 mars 2018}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Historique}
+
+\subsection{Chronologie}
+
+Vérifier les dates!
+
+\begin{itemize}
+
+\item Première machine pour calculer: abaque. (addition, soustraction)
+
+\item 1643: Pascaline, première machine à calculer mécanique. (addition,
+  soustraction)
+
+\item 1673: Première machine avec multiplications et divisions.
+
+\item 1725: Basille Bouchon, mécanisation d'un métier à tisser. Transposition
+  d'un programme sur un support. La machine n'a pas duré faute de fragilité.
+
+\item 1780: Découverte de l'électricité par Benjamin Franklin. (Avec cerf-
+  volant).
+
+\item 1805: Jacquard fait un métier à tisser complètement automatisé à carte
+  perforée   et alimenté à l'électricité.
+
+\item 1833: Babbage: machine analytique. Sortie non-tissu. Sortie sur des roues
+  crantées. Ada Lovelace, comtesse, première programmeuse. Elle faisait de la
+  science, rare à l'époque. Elle fait de la traduction de sciences pour la
+  machine de Babbage.
+
+\item 1876: Téléphone, par Alexander Graham Bell et Elisha Gray (stagiaire).
+  Le stagiare fait tomber un truc sur la
+
+\item 1911: CTRC (ancêtre d'IBM). Doit toquer chez tous les Américains pour
+  faire un resencement.
+
+\item 1924: IBM prend son nom.
+
+\item 1927: Première démonstration publique d'une télévision.
+
+\item 1936: Premier calculator, le Z1. Konrag Suze. Fait un ordinateur chez
+  ses parents. machine détruite par les Allemands pendant la guerre.
+  Reconstruite après par le même.
+
+\item 1939: Radio Shack (catalogue).
+
+\item 1939: Conception de l'ABC (Atanasoff-Berry Computer). Ruled the first automatic
+  digital computer en 1973. Not programmable, not turing-complete.
+
+\item 1940: Première TV couleur.
+
+\item 1941: Première machine Turing-complète: Zuse's Z3. Basée sur des tubes à
+  vide.
+
+\item 1944: March 1. Machine pour de la défense militaire. 12 000 tubes à vide.
+  Une chance sur 2 pour qu'un tube à vide avant la fin de l'exécution du
+  programme.
+
+\item 1945: Grace Hopper: trouve le premier bug sur le Harvard Mark II.
+  Invente aussi le COBOL plus tard.
+
+\item 1946: ENIAC, 18 000 tubes.
+
+\item 1946; Univac
+
+\item 1948: Transistor. (Hyper artisanal).
+
+\item 1949: EDVAC: Première machine pour tester des disques magnétiques.
+
+\item 1949: Binac: Premier ordinateur pour diriger des missiles \textbf{en temps
+    réel}.
+
+\item 1949: Le MIT construit la première machine qui joue aux échecs.
+
+\item 1949: Premier ordinateur commercialisé (demi-pièce): Univac II.
+
+\item 1952: RCA développe le Bizmac. Première base de données.
+
+\item 1952: Imprimante à matrice pour l'Univac 1107 dans les années 60.
+
+\item 1953:  Bande magnétiques.
+
+\item 1953: IBM 701. Machine à louer. Addition en 5 cycles, comme maintenant.
+  Fortran est créé sur ces machines par John Backus. Révolution. On passe de
+  zéros et de uns à une feuille de papier avec variables et commentaires.
+
+\item 1954: Premier OS pour l'IBM 704, un mainframe.
+
+\item 1954: RAND corporation: modèle pour illustrer l'ordinateur en 2004.
+
+\item 1955: Premier groupe d'utilisateur: SHARE (IBM 701).
+
+\item 1955: IBM demande à chaque pays de traduire computer. Jacques Perret: ``ordinateur''.
+
+\item 1957: Film ``Desk Set''. Ressemble aux assistants vocaux actuels.
+
+\item 1959: 8 traîtres. Bossent sur tubes à vide nouvelle génération. Partent
+  tous en même temps.
+
+\item 1959: Texas: Premier circuit intégré.
+
+\item 1959: COBOL
+
+\item 1959: IBM 401: 10 000 machines vendues.
+
+\item 1960: Téléphone automatisé.
+
+\item 1961: Premier micro-ordinateur. Fourni avec écran.
+
+\item PDP-1: Space war. Premier jeu vidéo.
+
+\item 1963: Tandy achète Radio Shack. Lancement pour le grand public.
+
+\item 1964: Un étudiant du MIT joue de la musique sur le PDP-1.
+
+\item 1964: CDC 6000. Ordinateur le plus puissant de son époque.
+
+\item 1964: Création du BASIC. Language interprété. Interpréteur écrit en
+  Assembleur.
+
+\item CDC: Lance des études d'informatique.
+
+\item 1965: Douglas Engelbart: Créé la première souris. Génie. Première
+  démonstation enregistrée.
+
+\item Herb Sutter (gourou du C++). Résume toutes les contributions d'Engelbart.
+  A aussi inventé le pattern matching.
+
+\item 1965: IBM 360. Couvrait tous les besoins de l'informaticien.
+
+\item 1965: Premier doctorant en informatique.
+
+\item 1968: Première calculette par Texas et HP.
+
+\item 1968: Fondation d'Intel.
+
+\item 1969: Fondation d'AMD.
+
+\item 1969: IBM intrduit System-3.
+
+\item 1969: Bell Labs arrête MULTICS. Ken Thompson implémente alors UNICS sur un
+  PDP/7. (4K mots de 18 bits). Codé en P. Jeu de mots avec Eunuque car sa femme
+  était partie.
+
+\item 1970: IBM vend
+
+\item 1971: IBM lance les disquettes.
+
+\item 1971: Intel 4004.
+
+\item 1971: Livres grand public.
+
+\item 1971: Kenbak I. 256 bits de RAM. Pour 750\$. Se branche sur la TV.
+
+\item 1972: Atari lance Pong.
+
+\item 1975: MITS lance l'Altair.
+
+\item 1975: Ouvertue de la première boutique d'ordinateurs.
+
+\item 1975: IBM 5100. Flop.
+
+\item 1976: Z80.
+
+\item 1976: Apple I.
+
+\item 1977: Atari VCS 2600.
+
+\item 1977: Bill Gates arrêté pour avoir grillé un feu rouge.
+
+\item 1977: Apple II.
+
+\item 1977: Apple, Comodore et Tnady commencent à vendre des ordianteurs
+  personnels.
+
+\item 1978: Premier demi-million d'ordinateurs vendus.
+
+\item Ouverture de The Source et de Compulab.
+
+\item 1980: Sinclair ZX 80 pour 99\$.
+
+\item 1981: IBM PC 5150. Appel d'offre pour les OS (à compléter)
+
+\end{itemize}
+
+\end{document}
