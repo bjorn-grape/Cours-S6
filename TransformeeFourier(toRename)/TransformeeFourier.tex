@@ -195,7 +195,81 @@ f(t) &= \frac{1}{2} + \frac{2}{\pi}\sum_{R = 0}^{\inf} \frac{(-1)^k}{2k + 1} \co
 f(t) &= \frac{1}{2} + \frac{2}{\pi} \sum_{k = 0}^{\inf} \frac{1}{2k =1} \sin((2k +1)t)\\
 \end{align*}
 
+\section{Formulaire}
+\subsection{Identite de Parseval}
 
+\url{http://www.bibmath.net/dico/index.php?action=affiche&quoi=./p/parseval.html}
+
+\subsection{Densite Gausienne}
+
+\begin{align*}
+  f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}\frac{x^2}{\sigma^2}}\\
+  F(f)(u) = e^{- \frac{1}{2} \sigma^2 u^2}
+\end{align*}
+
+
+\subsection{Translation}
+\begin{align*}
+  F(f(x-a))(u) = e^{iau} F(f)(u)
+\end{align*}
+
+\subsection{Modulation}
+
+\begin{align*}
+F(e^{i\omega_0 x} f(u))    = F (u - \omega_0)
+\end{align*}
+
+\subsection{Changement d'echelle}
+\begin{align*}
+  F(f(ux)) = \frac{1}{|a|} F(\frac{u}{a})
+\end{align*}
+
+\subsection{Conjugaison}
+\begin{align*}
+  F(\overline{f}(x)) = \overline{F(f)}(-u)
+\end{align*}
+
+\subsection{Derivation}
+\begin{align*}
+  F(f)(u) = \int f(x)e^{-iux} dx\\
+  F(f')(u) = i u F(f)(u)
+\end{align*}
+
+\subsection{Theoreme de Parseval}
+
+\begin{align*}
+  \int_{-\infty}^{\infty} |f(x)|^2 dx = \frac{1}{2\pi} \int_{-\infty}^{\infty} |F(u)|^2 du\\
+  \int_{-\infty}^{\infty} F(u)\overline{G}(u) du\\
+\end{align*}
+
+\subsection{Convolution}
+
+\begin{align*}
+  f * g(x) = \int_{x \in R} f(u) g(x - a) du\\
+  F(f * g) (u) = F(f)(u) . F(g)(u)\\
+\end{align*}
+De plus si $f,g \in L^2$
+\begin{align*}
+  F(fg) = F(f) * F(g)
+\end{align*}
+
+\subsection{fonction ``porte''}
+
+\begin{align*}
+  F(\pi_a)(u) = 2 \frac{\sin(au)}{u}
+\end{align*}
+
+\subsection{Distribution de Dirac}
+\begin{align*}
+  \int_{-\infty}^{\infty} \varphi_0(t)dt = 1\\
+\end{align*}
+$\delta_0 $ : Distribution de Dirac
+
+\begin{align*}
+  F(\delta_0)(u) &= \int e^{iux} \delta_0(x)dx = 1\\
+  \int f(x)\delta_a(x)dx &= f(a)\\
+  F(\delta_a)(u) &= e^{-iau}\\
+\end{align*}
 
 
 
