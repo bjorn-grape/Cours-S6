@@ -28,15 +28,16 @@
 
 % Links. Should be loaded last.
 \usepackage{hyperref}
-\hypersetup{colorlinks=true,
-            linkcolor=blue,
-            filecolor=magenta,
-            urlcolor=cyan,
-            citecolor=blue}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+  citecolor=blue}
 
 
-% Useful environment
-\newenvironment*{dummyenvironment}{}{}
+% Dummy environment. Useful for some convoluted layouts.
+\newenvironment*{dummyenv}{}{}
 
 % Custom commands
 \newcommand{\R}{\mathbb{R}}
@@ -57,24 +58,24 @@
 
 \section{Compression de données}
 
-Site slides : \url{www.lrde.epita.fr/~gtochon/CODO/}
+Site des slides : \url{www.lrde.epita.fr/~gtochon/CODO/}
 
-Compression + decompression
+Compression + décompression
 
-Sans compression de donnees, un film 720p d'une heure ferait presque 400Gio.
+Sans compression de données, un film 720p d'une heure ferait presque 400Gio.
 
-La naissance naïve de la compression de données remonte aux environ du code
+La naissance naïve de la compression de données remonte aux environs du code
 morse.
 Shannon est responsable des fondements mathématiques.
 
-Autre acteurs:
+Autres acteurs:
   - Abraham Lempel
   - David Huffmann
   - Terry Welch
 
 \
 
-Le but de la compression est que lors de la decompression, ce soit le moins
+Le but de la compression est que lors de la décompression, ce soit le moins
 visible possible par l'utilisateur.
 
 \
@@ -186,7 +187,7 @@ On considère donc:
 \begin{align*}
   N_\Sigma &= \{0, 1\} \\
   p(0) &= p_0 = p \\
-  p(1) &= p_1 = 1 - p \\
+  p(1) &= p_1 = 1 - p
 \end{align*}
 
 On a alors:
@@ -264,14 +265,22 @@ On a donc:
 
 \subsubsection{Exercice}
 
+VÉRIFIER AVEC LE PROF!
+
+\
+
 De combien de bits a-t-on besoin pour encoder le fichier suivant?
 
 $$ F = \{ACABBDDBAAABCAAA\} $$
 
+Dans ce cas, on utilisera l'alphabet suivant:
+
+$$ \Sigma = \{A, B, C, D \} $$
+
 Comptons le nombre d'occurrences de chacune des lettres de $\Sigma$ :
 
 \begin{center}
-  \begin{dummyenvironment}
+  \begin{dummyenv}
     \left\begin{array}{ll}
            A: & 8 \\
            B: & 4 \\
@@ -280,10 +289,11 @@ Comptons le nombre d'occurrences de chacune des lettres de $\Sigma$ :
          \end{array}
     \right\}
     \quad \text{Longeur: 16}
-  \end{dummyenvironment}
+  \end{dummyenv}
 \end{center}
 
 \begin{enumerate}
+  
 \item Non compressé?
 
   C'est tout simplement, en notant $\Sigma$ l'alphabet utilisé pour encoder le
