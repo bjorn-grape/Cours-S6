@@ -60,6 +60,8 @@
 
 Site des slides : \url{www.lrde.epita.fr/~gtochon/CODO/}
 
+Ces notes sont à travailler en parallèle avec les slides.
+
 Compression + décompression
 
 Sans compression de données, un film 720p d'une heure ferait presque 400Gio.
@@ -92,10 +94,10 @@ d'informations.
 
 \
 
-Prenons un alphabet $\Sigma$ de $N$ symboles
+Prenons un alphabet $\Sigma$ de $N$ symboles:
 $$ \Sigma = \{s_1,s_2, ..., s_N\} $$
 
-Avec leurs probabilités d'occurrence respectives
+Avec leurs probabilités d'occurrence respectives:
 $$ p_i = p(s_i) $$
 
 Évidemment, on a
@@ -112,17 +114,17 @@ On définit $q_i$ la quantité d'information totale d'un symbole:
 $$ q(s_i) = -log_2(p_i) $$
 
 On a donc $Q_{Tot}$ la quantité d'information propre totale de $s_i$ contenue
-dans $F$:
+dans $F$, d'unité Sh/symbole, abrégée Sh/symb:
 
-$$ Q_{Tot}(s_i) = -N_F \cdot p_i \cdot \log_2(p_i)$$
+$$ Q_{Tot}(s_i) = -N_F \cdot p_i \cdot \log_2(p_i) \text{ Sh/symb}$$
 
 On définit donc $Q_{Tot}(F)$ la quantité d'information contenue dans un fichier
-$F$:
+$F$, d'unité Sh:
 
 \begin{align*}
   Q_{Tot}(F) &= \sum_{i = 1}^{N_F}(Q_{Tot}(s_i) \\
              &= \sum_{i = 1}^{N_F} -N_F \ti p_i \ti \log_2(p_i) \\
-             &= -N_F \sum_{i = 1}^{N_F}p_i \ti \log_2(p_i)
+             &= -N_F \sum_{i = 1}^{N_F}p_i \ti \log_2(p_i) \text{ Sh}
 \end{align*}
 
 Or ce $-N_F$ devant la somme pose problème:  \textbf{la quantité d'information
@@ -139,7 +141,7 @@ $$ H = \frac{Q_{Tot}(F)}{N_F} = - \sum_{i = 1}^{N_F}p_i \ti \log_2(p_i)$$
 
 \
 
-On notera en outre $Q_{Tot}$ avec le symbole $Sh$. On a bien évidemment:
+On notera en outre que:
 
 $$ H \equiv Sh $$
 
@@ -167,7 +169,7 @@ $$ E(X) = \sum_{i = 1}^nx_i \ti p_i = \sum_{i = 1}^nx_i \ti P(X = x_i) $$
 
 Et on a donc:
 
-$$ E(\varphi(X)) = \sum_{i = 1}^n \varphi(x_i) P(X = X_i) $$
+$$ E(\varphi(X)) = \sum_{i = 1}^n \varphi(x_i) P(X = x_i) $$
 
 \
 
@@ -327,10 +329,125 @@ Comptons le nombre d'occurrences de chacune des lettres de $\Sigma$ :
 
 \end{enumerate}
 
+\section{Algorithmes de compression conservatifs}
 
+\subsection{Run-length encoding}
 
+Pas génial pour le texte.
 
+Mieux pour les images de synthèse. C'est utilisé dans bitmap.
 
+Le principe c'est de coder combien de fois on voit chaque caractère.
+
+Pour les nombres, caractère spécial.
+
+\subsubsection{Cas du fax}
+
+C'est utilisé pour le fax et ça marchait bien car il y a beaucoup de blanc.
+
+On peut même compresser la différence entre deux lignes consécutives pour gagner
+de la place.
+
+C'est une technique très largement utilisée, par exemple dans JPEG et MPEG.
+
+\subsection{Algorithme d'Huffman}
+
+Un des algorithmes les plus célèbres.
+
+Code entropique: il est basé sur la distribution statistique des symboles.
+
+\
+
+Deux étapes:
+
+\begin{enumerate}
+\item Construction d'un arbre binaire donc les feuilles sont les symboles.
+\item Encodage du message avec cet arbre.
+\end{enumerate}
+
+\
+
+Première étape:
+
+\begin{enumerate}
+\item Trier la table
+\item Fusionner les deux symboles
+\end{enumerate}
+
+Seconde étape:
+
+\begin{enumerate}
+\item Parcourir l'arbre de la racine vers les veuiulles (les symboles)
+\item Toujours assigner 1 au fils gauche et 1 au fils droit (ou l'inverse)
+\item Lire l'encodage sur la branche entière.
+\end{enumerate}
+
+\
+
+C'est un encodage à préfixe donc on peut le décoder à la volée. Il est optimal à
+la longeur d'encodage moyenne parmi les encodages à préfixe. Il nous donne
+exactement l'entropie tant que que les symboles sont une puissance de 2.
+
+\
+
+Problème: c'est de l'encodage symbole par symbole.
+
+\
+
+De nos jours, on ne s'en sert pas tel quel, mais en conjonction avec des
+algorithmes plus complexes.
+
+\subsection{L'algorithme bzip2}
+
+Libre et open-source, créé entre 1996 et 2000. Grosse usine à gaz.
+
+L'idée:
+
+\begin{enumerate}
+\item Appliquer la transformée de Burrows-Wheeler. Cela change l'ordre des
+  caractères pour former des suites de caractères identiques, tout en restant
+  réversible à la décompression.
+
+  \
+
+  Encodage:
+  \begin{itemize}
+  \item Contruire une matrice contenant toutes les rotations de la string à
+    transformer.
+  \item Trier les colonnes selon l'ordre alphabétique.
+  \item Stocker la rotation de la matrice et ces colonnes.
+  \end{itemize}
+
+  \
+
+  Décodage:
+
+  \begin{itemize}
+  \item Concaténer les chaîne avec la dernière colonne de la table.
+  \item À céompléter
+  \end{itemize}
+
+\item La transformée ``Move to front''
+
+\item Algorithme d'Huffman.
+
+\end{enumerate}
+
+\
+
+Problème: lent à la compression, mais très économe en place. Très efficace pour
+langage naturel, pas trop pour du code.
+
+\subsection{Algorithme LZW}
+
+On a intérêt à le refaire sur papier pour bien le comprendre.
+
+C'est le premier algorithme, avec LZ78, qui fasse de l'aprentissage de
+dictionnaire non-supervisé.
+
+Voir le processus sur les diapos.
+
+C'est utilisé dans GIF.
 
 
 
