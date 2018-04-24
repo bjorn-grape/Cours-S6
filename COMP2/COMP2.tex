@@ -73,6 +73,75 @@ Rappel du cours d'assembleur:\\
 On va sauvegarder fp (frame ptr) et sp (stack ptr) dans la stack pour pouvoir les restaurer a la fin des appels de fonction.\\
 Regle a respecter : je n'ai pas le droit d'acceder a de la memoire en dehors de ma frame, je peux cependant l'aggrandir.\\
 
+\section{Frame n recursion}
+
+\subsection{recursion}
+On doit garder un static link sur les frames precedentes.
+
+\
+
+\
+\begin{tabular}{|l|}
+\hline
+ONE   \\ \hline
+TWO   \\ \hline
+THREE \\ \hline
+\end{tabular}
+\\
+
+\
+TWO garde un static ptr sur ONE\\et THREE garde un static ptr sur TWO.
+
+\
+
+\
+\begin{tabular}{|l|}
+\hline
+ONE   \\ \hline
+TWO   \\ \hline
+TWO   \\ \hline
+TWO   \\ \hline
+TWO   \\ \hline
+TWO   \\ \hline
+THREE \\ \hline
+\end{tabular}
+\\
+
+\
+chaque TWO garde un static ptr sur ONE\\et THREE garde un static ptr sur le TWO le plus profond.
+
+\subsection{MIPS}
+En MIPS le static link est stocke au debut de la frame.
+\subsection{Assembleur}
+Pour la partie Hir Level, on va devoir sauvegarder les variables locales par frame. \\
+La connaissance de la taille de la frame sera faite a l'execution.\\
+
+
+\subsection{Linearisation}
+
+On va chercher a applatir l'arbre construit par le compilateur.\\
+
+\newpage
+\subsection{CJUMP}
+\textemdash \textemdash \textemdash\textemdash \textemdash \textemdash \\
+\texttt{if condition\\ then\\ do A\\ else\\ do B}\\
+\textemdash \textemdash \textemdash\textemdash \textemdash \textemdash \\
+$\Longleftrightarrow $\\
+\textemdash \textemdash \textemdash\textemdash \textemdash \textemdash \\
+\texttt{JumpEqual condition labelA\\
+labelB (Optional)\\
+... (do B)\\
+Jump labelendAB\\
+labelA\\
+...(do A)\\
+labelendAB\\
+}
+\textemdash \textemdash \textemdash \textemdash \textemdash \textemdash \\
+
+
+
+
+
 
 
 \end{document}
