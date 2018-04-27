@@ -63,6 +63,8 @@
 Most of the course can be found here:
 \url{https://www.lrde.epita.fr/~tiger/lecture-notes/slides/tyla/}
 
+On a envie d'apprendre les noms des créateurs des langages pour le partiel.
+
 \subsection{Chronologie}
 
 Vérifier les dates!
@@ -438,10 +440,115 @@ Langage non révolutionnaire, petite échelle.
 
 Tout est objet.
 
-Simple à comprendre.
+Simple à comprendre. Objectif; faire une tablette pour les enfants.
 
 La seule interface est de passer des messages.
 
 Gros problème de performance.
+
+\
+
+Règles pour décrire le fonctionnement des métaclases de Smalltalk:
+
+\begin{enumerate}
+
+\item Tout est objet.
+
+\item Tout est une instance de classe
+
+\item Toute classe possède une super-classe (contrairement à Java, avec Object,
+  par exemple.)
+
+\item Tout fonctionne au travers de passage de messages.
+
+\item Le lookup doit se faire selon la chaîne d'héritage. (Donc pas d'héritage
+  multiple.)
+
+\item Chaque classe est une instance d'une méta-classe. (Donc générateur de
+  méta-classe pour simplifier la vie car on a besoin de travailler sur les deux
+  simultanément).
+
+\item La hiérarchie des méta-classes est parallèle à la hiérarchie des classes.
+
+\item Chaque classe hérite de ``Class''.
+
+\item Chaque méta-classe est une instance de ``Metaclass''.
+
+  \item La méta-classe de ``Metaclass'' est une instance de ``Metaclass''.
+
+\end{enumerate}
+
+\
+
+Donc en C++:
+
+class
+
+struct
+
+interface
+
+\
+
+Intérêt d'une métaclasse: dire comment struct et class se comportent.
+
+\
+
+Voir Squeak, une implémentation moderne de Smalltalk.
+
+Ajouter le schéma de l'héritage de Squeak.
+
+\subsubsection{C++}
+
+Par Stroustrup.
+
+Ajouts:
+
+\begin{itemize}
+
+\item const
+
+\item reference
+
+\item Prototypes
+
+\item Booleans
+
+\item Declaring variables anywhere
+
+\item void
+
+\item inline
+
+\item namespace
+
+\item overloading
+
+\end{itemize}
+
+\subsection{Propriété de l'OO}
+
+Rica Cardelli: Travaille sur le typage.
+
+Pour lui, un bon langage doit avoir ces caractéristiques:
+
+\begin{itemize}
+
+\item Économie de l'exécution
+
+\item Économie de compilation
+
+\item Économie de dévelopement à petite échelle
+
+\item Économie de dévelopement à grande échelle
+
+\item Économie de fonctionnalités
+
+\end{itemize}
+
+\section{Sous-programmes}
+
+\subsection{}
+
 
 \end{document}
