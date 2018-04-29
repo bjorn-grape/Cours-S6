@@ -1,0 +1,446 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+
+% Defining sane commands for euros.
+\usepackage{textcomp}
+\newcommand{\euro}{\texteuro}
+
+% Page format.
+\usepackage{geometry}
+\geometry{top=2cm, bottom=2cm, left=1cm, right=1cm}
+
+% Figures.
+\usepackage{graphicx}
+\graphicspath{{resources/}}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz}
+
+% Math and chemistry.
+\usepackage{chemist}
+\usepackage{siunitx}
+\usepackage{numprint}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+
+% Links. Should be loaded last.
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+            linkcolor=blue,
+            filecolor=magenta,
+            urlcolor=cyan,
+            citecolor=blue}
+
+% Dummy environment. Useful for some convoluted layouts.
+\newenvironment*{dummyenv}{}{}
+
+% Custom commands
+\newcommand{\Reels}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\der}{\,\mathrm{d}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ti}{\cdot}
+
+
+\title{Transformee Fourier}
+\author{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Historique}
+
+Dans la musique, on peut retrouver des gammes 'non-dissonantes'.\\
+Les instruments etaient accordes a l'oreille avec une note de base.\\
+Cela creait des dissonnances.\\
+
+\section{Introduction}
+Peut on obtenir un signal elementaire avec des signaux elementaire ?\\
+
+On va s'interesser aux conditions qui font qu'un signal est compose de signaux elementaires.
+
+\begin{align*}
+f(t)  \\
+        f   ('periode')  2\pi \\
+\end{align*}
+
+\subsection{Definition}
+
+\begin{align*}
+  e^{\alpha z}   (derivee) &\rightarrow \alpha e^{\alpha z}\\
+  e^{\alpha z} (primitive) &\rightarrow \frac{1}{\alpha} * e^{\alpha z}\\
+\end{align*}
+
+\begin{align*}
+  g(t) &= \sum_{k \in Z} e_{n}e^{int}\\
+  \int_{0}^{2\pi} g(t)e^{-int} dt &= \int_{0}^{2x} \sum_{m \in Z} e_m e^{imt} e^{imt} dt \\
+  &= \sum_{m \in Z} c_m \int_{0}^{2\pi} e^{i(m - n)t} dt\\
+  &= c_n \int_{0}^{2\pi} + \sum_{m \neq n} e^{i(m-n)t} dt \\
+  &= 2\pi c_n + 0
+\end{align*}
+
+\begin{align*}
+  c_n = \frac{1}{2\pi} \int_0^{2\pi} g(t) e^{-int} dt
+\end{align*}
+\subsection{Definition 2}
+Une fonction periodique est une somme de fonction elementaires.
+
+\newpage
+\subsection{Definition 3}
+Prenons $f$ de periode $2\pi$\\
+La serie de Fourier de $f$ est :\\
+
+\begin{align*}
+b_0 + \sum_{n = 1 }^{\inf} b_n  \cos(nt) + \sum_{n = 1}^{\inf} a_n \sin(nt)\\
+\sum_{n \in Z} c_n e^{int}\\
+\end{align*}
+
+\begin{align*}
+  b_0 &= \frac{1}{2\pi} \int_{0}^{2\pi} f(t) dt\\
+  b_n &= \frac{1}{\pi} \int_{0}^{2\pi} f(t) \cos(nt)dt\\
+  a_n &= \frac{1}{\pi} \int_0^{2\pi} f(t)\sin(nt) dt\\
+  c_n &= \frac{1}{2\pi} f(t) e^{-int} dt
+\end{align*}
+$n > 0$ \\
+\begin{align*}
+  c_n &= \frac{b_n + i a_n}{2}\\
+   c_{-n} &= \frac{b_n - i a_n}{2}\\
+  \end{align*}
+   $n = 0$\\
+  \begin{align*}
+ c_0 &= b_0
+\end{align*}
+
+$f$ a valeur nulle.\\
+$a_n$ et $b_n$ reels\\
+
+$f$ est paire\\
+$ \forall a_n = 0$\\
+$f$ est impaire\\
+$\forall b_n = 0$\\
+
+Ensemble de fonctions periodiques :\\
+- continue\\
+- continent derivable\\
+- Integrale\\
+- "Pas trop de  discontinuite"\\
+- ...\\
+
+Un ensemble $E$ choisi.\\
+Espace vectoriel.\\
+$f$ et $g \in $ E\\
+$\alpha_1 \beta \in C$\\
+$\alpha f + \beta g \in E$\\
+
+\begin{align*}
+  <f,g> &= \frac{1}{2\pi} \int f(t) \overline{g}(t) dt\\
+\end{align*}
+
+\begin{align*}
+<f,g> &= \frac{1}{2\pi} \int f\overline{f}(t) dt\\
+      &= \frac{1}{2\pi} \int |f|^2 dt
+\end{align*}
+ressemble a $||f||^2$
+
+\begin{align*}
+  <e^{int},e^{int} > &= 0\\
+\end{align*}
+ $n \neq m$\\
+ \begin{align*}
+   <e^{int},e^{imt}> &= 1\\
+ \end{align*}
+ 
+ \begin{align*}
+\sum_{n \in Z} < f,e^{in}> e^{int}\\   
+ \end{align*}
+
+En dimension 3,$ e_1, e_2, e_3 $etant des espaces vectoriels, on peut exprimer $u(x,y,z)$, tq:\\
+$u = (u.e_1)e_1 + (u.e_2)e_2 + (u.e_3)e_3$\\
+
+\section{Convergence}
+
+\subsection{Theoreme}
+f  classe $C^2$\\
+Convergence\\
+$f(t) = \sum c_n e^{int}$\\
+
+Fonction "reguliere par morceau"\\
+- Un nombre fini de discontinuites\\
+- nombre fini d'extrema\\
+
+Si $f$ continu en $t$ ; $f(t) = \sum c_{n} e^{int}$\\
+Si $f$ discontinu en $t$ : $\sum c_n e^{int} = (\frac{1}{2} (f(t-) + f(t+)))$\\
+
+\subsection{Phenomene de Gibbs.}
+
+\subsubsection{Integration et derivation}
+\begin{align*}
+ \sum_a^b e^{int} dt &= (b - a) c_0 + \sum_{n \neq 0} C_n \int_a^b e^{int} dt\\
+ &= (b - a) c_0 + \sum_{n \neq 0 } \frac{C_n}{in} (e^{inb} - e^{ina}) 
+\end{align*}
+
+Pour la derivation:\\
+Hypothese $f$ continu derivable\\
+$f'$ regulier par morceaux\\
+\begin{align*}
+  \sum inc_n e^{int} &= f'(t) ... continue\\
+&=\frac{1}{2} (f'(t+)+ f'(t-)) ... discontinue
+\end{align*}
+
+\subsubsection{Exemple}
+
+\begin{align*}
+  f(t) = 1 si t \in ]-a, +a[\\
+        0 ailleurs sur [-\pi,\pi]\\
+        ...\\
+        f(t) = \frac{a}{\pi} + \frac{2}{\pi} \sum_{n = 1}^{\inf} \frac{\sin(n a)}{n} cos(nt)\\
+\end{align*}
+
+\subsubsection{Cas particulier}
+\begin{align*}
+f(t) &= \frac{1}{2} + \frac{2}{\pi}\sum_{R = 0}^{\inf} \frac{(-1)^k}{2k + 1} \cos{(2k +1) }t  \\
+f(t) &= \frac{1}{2} + \frac{2}{\pi} \sum_{k = 0}^{\inf} \frac{1}{2k =1} \sin((2k +1)t)\\
+\end{align*}
+
+\section{Formulaire}
+\subsection{Identite de Parseval}
+
+\url{http://www.bibmath.net/dico/index.php?action=affiche&quoi=./p/parseval.html}
+
+\subsection{Densite Gausienne}
+
+\begin{align*}
+  f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2}\frac{x^2}{\sigma^2}}\\
+  F(f)(u) = e^{- \frac{1}{2} \sigma^2 u^2}
+\end{align*}
+
+
+\subsection{Translation}
+\begin{align*}
+  F(f(x-a))(u) = e^{iau} F(f)(u)
+\end{align*}
+
+\subsection{Modulation}
+
+\begin{align*}
+F(e^{i\omega_0 x} f(u))    = F (u - \omega_0)
+\end{align*}
+
+\subsection{Changement d'echelle}
+\begin{align*}
+  F(f(ux)) = \frac{1}{|a|} F(\frac{u}{a})
+\end{align*}
+
+\subsection{Conjugaison}
+\begin{align*}
+  F(\overline{f}(x)) = \overline{F(f)}(-u)
+\end{align*}
+
+\subsection{Derivation}
+\begin{align*}
+  F(f)(u) = \int f(x)e^{-iux} dx\\
+  F(f')(u) = i u F(f)(u)
+\end{align*}
+
+\subsection{Theoreme de Parseval}
+
+\begin{align*}
+  \int_{-\infty}^{\infty} |f(x)|^2 dx = \frac{1}{2\pi} \int_{-\infty}^{\infty} |F(u)|^2 du\\
+  \int_{-\infty}^{\infty} F(u)\overline{G}(u) du\\
+\end{align*}
+
+\subsection{Convolution}
+
+\begin{align*}
+  f * g(x) = \int_{x \in R} f(u) g(x - a) du\\
+  F(f * g) (u) = F(f)(u) . F(g)(u)\\
+\end{align*}
+De plus si $f,g \in L^2$
+\begin{align*}
+  F(fg) = F(f) * F(g)
+\end{align*}
+
+\subsection{fonction ``porte''}
+
+\begin{align*}
+  F(\pi_a)(u) = 2 \frac{\sin(au)}{u}
+\end{align*}
+
+\subsection{Distribution de Dirac}
+\begin{align*}
+  \int_{-\infty}^{\infty} \varphi_0(t)dt = 1\\
+ \end{align*}
+$\delta_0 $ : Distribution de Dirac
+
+\begin{align*}
+  F(\delta_0)(u) &= \int e^{iux} \delta_0(x)dx = 1\\
+  \int f(x)\delta_a(x)dx &= f(a)\\
+  F(\delta_a)(u) &= e^{-iau}\\
+\end{align*}
+
+\section{Transformée de Fourier}
+
+\subsection{Introduction}
+
+Définition:
+
+$$ \forall f \in L^{1}, \quad \mathcal{F}(f)(u) = \int^{+\infty}_{-\infty} f(x) \mathrm{e}^{-iux} \: \mathrm{d} t $$
+
+\textbf{Attention à la normalisation!}
+
+\
+
+Condition d'existence:
+
+Si $ f \in L^1(\mathbb{R}) $, alors $\mathcal{F}(f)$ est
+
+\begin{itemize}
+\item Continue
+\item Croissante
+\item $ \underset{u \to \infty}{\lim} \mathcal{F}(f)(u) = 0 $
+\end{itemize}
+
+Si $f \in L^2(\mathbb{R})$, c'est plus compliqué.
+
+\
+
+\subsection{Densité Gaussienne}
+
+Avec $\sigma > 0$, on a:
+
+\begin{align*}
+  f(x) = \frac{1}{\sigma \sqrt{2\pi}} \, \mathrm{e}^{-\frac{1}{2}\frac{x^2}{\sigma^2}}\\
+  \mathcal{F}(f)(u) = e^{- \frac{1}{2} \sigma^2 u^2}
+\end{align*}
+
+
+\subsection{Linéarité}
+
+$$ \mathcal{F}(\lambda f + \mu g) = \lambda \mathcal{F}(f) + \mu \mathcal{F}(g) $$
+
+\subsection{Translation}
+
+\begin{align*}
+  F(f(x-a)(u) = e^{iau} \mathcal{F}(f)(u)
+\end{align*}
+
+\subsection{Modulation}
+
+\begin{align*}
+\mathcal{F}(e^{i\omega_0 x} f(u)) = \mathcal{F} (u - \omega_0)
+\end{align*}
+
+\subsection{Conjugaison}
+\begin{align*}
+  \mathcal{F}(\overline{f}(x)) = \overline{\mathcal{F}(f)}(-u)
+\end{align*}
+
+\subsection{Changement d'échelle}
+\begin{align*}
+  \mathcal{F}(f(ax)) = \frac{1}{|a|} \mathcal{F} \left( \frac{u}{a} \right)
+\end{align*}
+
+\subsection{Dérivation}
+\begin{align*}
+  % \mathcal{F}(f)(u) = \int f(x)e^{-iux} dx\\
+  \mathcal{F}(f')(u) = i u \mathcal{F}(f)(u)
+\end{align*}
+
+\textbf{On peut dériver en faisant une multiplication!}
+
+\subsection{Inversion}
+
+On a $f$ prériodique et:
+
+$$ f(t) = \sum c_n e^{int}$$
+
+Et
+
+$$ c_n = \frac{1}{2 \pi} \int^{2x}_0 f(t) e ^{-int} \mathrm{d} t $$
+
+\
+
+On a donc:
+
+\begin{align*}
+\mathcal{F}(u) &= \int f(t) e^{-iut} \mathrm{d} t \\
+  f(x) &= \frac{1}{2 \pi} \int \mathcal{F}(u) e^{-iux} \mathrm{d} t
+\end{align*}
+\subsection{Convolution}
+
+Si on a:
+
+\begin{align*}
+  f \times g(x) &= \int_{x \in \mathbb{R}} f(u) g(x - a) \mathrm{d}u
+\end{align*}
+
+Alors:
+
+\begin{align*}
+  F(f \cdot g) (u) &= F(f)(u) \cdot F(g)(u)
+\end{align*}
+
+De plus si $f,g \in L^2$
+
+\begin{align*}
+  F(fg) = F(f) * F(g)
+\end{align*}
+
+\subsection{Théorème de Parseval}
+
+\begin{align*}
+  \int_{-\infty}^{\infty} |f(x)|^2 dx = \frac{1}{2\pi} \int_{-\infty}^{\infty} |F(u)|^2 \mathrm{d}u\\
+  \int_{-\infty}^{\infty} F(u)\overline{G}(u) du\\ % Ligne non dite au second cours...
+\end{align*}
+
+\section{Exemples}
+
+\subsection{Fonction ``porte''}
+
+\begin{align*}
+  F(\Pi_a)(u) = 2 \frac{\sin(au)}{u}
+\end{align*}
+
+On notera que
+
+\begin{align*}
+  \int^{+\infty}_{_\infty} \Pi_a^2 dx = 2a \\
+  \frac{1}{2\pi} \int^{+\infty}_{_\infty} 4 \frac{\sin(au)^2}{u^2} du = 2a \\
+  \int^{+\infty}_{_\infty} \left( \frac{\sin(u)}{u^2} \right) ^2 du = \frac{2}{4} \times 2 \pi = \pi
+\end{align*}
+
+\subsection{Distribution de Dirac}
+\begin{align*}
+  \int_{-\infty}^{\infty} \varphi_\sigma(t)dt = 1\\
+\end{align*}
+
+Où $\sigma$ petit.
+
+$\delta_0 $ : Distribution de Dirac
+
+\begin{align*}
+  F(\delta_0)(u) &= \int e^{iux} \delta_0(x)dx = 1\\
+  \int f(x)\delta_a(x)dx &= f(a)\\
+  F(\delta_a)(u) &= e^{-iau}\\
+\end{align*}
+
+\subsection{Fonction de Lorentz}
+
+On a
+
+$$ f(x) = \frac{a}{\pi} \frac{1}{x^2 + a^2} = \frac{1}{a \pi} \frac{1}{1 + \left(\frac{x}{a} \right) ^2 }$$
+
+Donc:
+
+$$ \mathcal{F}(f)(u) = e^{-a|u|} $$
+
+\end{document}
