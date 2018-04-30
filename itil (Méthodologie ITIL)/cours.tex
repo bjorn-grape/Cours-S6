@@ -1,0 +1,148 @@
+\documentclass[a4paper,11pt]{article}
+
+% Standart.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage{textcomp}
+\newcommand{\euro}{\texteuro}
+
+% Page format.
+\usepackage{geometry}
+\geometry{top=2cm, bottom=2cm, left=1cm, right=1cm}
+
+% Figures.
+\usepackage{graphicx}
+\graphicspath{{resources/}}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz}
+
+% Math and chemistry.
+\usepackage{chemist}
+\usepackage{siunitx}
+\usepackage{numprint}
+
+
+% Links. Should be loaded last.
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+            linkcolor=blue,
+            filecolor=magenta,
+            urlcolor=cyan,
+            citecolor=blue}
+
+\title{Méthodologie ITIL}
+\author{Jean-Marc Chevereau}
+\date{18 mars 2018}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\
+
+\section{Introduction}
+
+\subsection{Enjeux}
+
+Quel est le budget informatique d'une entreprise du CAC40?
+
+Entre 1 et 3 milliards.
+
+Combien d'applications chez France Télécom/Orange? Entre 20 000 et 25 000.
+
+Entre 3 000 et 5 000 incidents par jour dans un grand système d'information et
+résolution en 20 min en moyenne. Gagner 1 min représente 500 k\euro .
+
+Il est donc important d'uniformiser les pratiques.
+
+La moitié du temps est passé à faire des relances et à perdre du temps.
+
+\subsection{Exemples}
+
+\subsubsection{Hôtels}
+
+Accor Hôtels
+
+1967, Premier en France, 4 100 Hôtels, 95 pays, 240 000 employés.
+
+Chiffre d'affaire: 6 milliards.
+
+Capitalisation: 12 milliards.
+
+\
+
+Airbnb
+
+2008, 3 millions de maisons, 192 pays, 2 000 employés., 65 000 villes.
+
+Chiffre d'affaire: 2,8 milliards.
+
+Capitalisation: 31 milliards.
+
+\subsubsection{Voitures}
+
+\begin{center}
+  \begin{tabular}{|c|c|}
+    \hline
+    Tesla & Ford \\
+    \hline
+    2003 & 1903\\
+    100 000 voitures/an & 6,8 millions de voitures/an\\
+    Chiffre d'affaire: 7 milliards. & Chiffre d'affaire: 141 milliards.\\
+    Capitalisation: 57 milliards. & Capitalisation: 49 milliards.\\
+    \hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Banques}
+
+Révolution avec la fin des agences, etc.
+
+Changement de banques plus fréquents et faciles.
+
+Révolut: Changements de monnaie moins chers, avec application smartphone. Zéro
+frais quand on change. Carte mastercard liée à compte avec 3 monnaies (Euros,
+livres, dollars). Créé par Polonais.
+
+\subsubsection{General Electric}
+
+\begin{quote}
+``If you go to bed as an industrial company, you're going to make up as a
+software company''
+\end{quote}
+
+\subsubsection{SMACS}
+
+SMACS (Social Media Analytics Cloud Security) +15-20\% sur 5 ans.
+
+\section{Devoteam}
+
+Propagande.
+
+\section{Définitions}
+
+\subsection{Service}
+
+Définition: A means of delivering value to customers by facilitating the
+outcomes they want to achieve without the ownership of specific costs and risks.
+
+Création de valeur (The basis of differentiation in the marketplace) =
+Warranty (measured in terms of the levels of avalability, capacity, continuity
+and security) + Utility ``What the customer gets'' (Measured on the basis of the
+number of key ``outcomes supported'' and ``constraints solved'').
+
+\
+
+Costs and risks are still there, and managed by the service provider
+
+\subsection{Processus}
+
+A set of coordinated activities combining and implementing resources and
+capabilities in order to produce an outcome, which, directly or indirectly,
+creates value for an external customer or stakeholder.
+
+\end{document}
