@@ -1,0 +1,98 @@
+\documentclass[a4paper,11pt]{article}
+
+% Standart.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+
+% Defining sane commands for euros.
+\usepackage{textcomp}
+\newcommand{\euro}{\texteuro}
+
+% Page format.
+\usepackage{geometry}
+\geometry{top=2cm, bottom=2cm, left=1cm, right=1cm}
+
+% Figures.
+\usepackage{graphicx}
+\graphicspath{{resources/}}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz}
+
+% Math and chemistry.
+\usepackage{chemist}
+\usepackage{siunitx}
+\usepackage{numprint}
+
+
+% Links. Should be loaded last.
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+            linkcolor=blue,
+            filecolor=magenta,
+            urlcolor=cyan,
+            citecolor=blue}
+
+\title{MOB2}
+\author{Didier Vernat}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section{Introduction}
+(Voir les slides du cours pour les infos manquantes)
+
+\
+
+Le but de ce cours est de resituer l'approche classique de mob1 en le considerant comme un cas particulier de mob2.
+C'est un contexte plus general.\\
+CLOS : Common Lisp Object System\\
+Typage dynamique + multimethodes.\\
+Il est implemenete en lui meme $\rightarrow$ homoicomicite du langage.\\
+La couche oriente objet de CLOS est implemente en lui meme.\\
+
+
+\subsection{Origine}
+Small talk est le langage oriente objet dans l'idee.\\
+l'origine de CLOS a la meme origine. Lisp etait presque uniquement utilise dans les labos.\\
+CLOS est a l'origine d'idees novatrices.\\
+
+En 1986, l'ACM (organisation qui met en place des conferences) organise une conference Lisp. Un groupe informel met en place le debut de la standardisation  de la couche objet de LISP.\\
+CLISP a ete formalise en 94. 3 entreprises avec des dialectes de LISP differents.\\
+Lucid - Richard Gabriel : \url{https://en.wikipedia.org/wiki/Richard_P._Gabriel}\\
+\subsection{Caracteristiques}
+L'approche classique d'oriente objet est l'envoi de messages.\\
+Nous allons voir les multimethodes, a l'exterieur des classes.\\
+Dans CLOS, il n'y a pas d'envoi de message. C'est plus harmonieux, car pas de syntaxe particuliere.\\
+Il y a des tas d'ambiguite, liees a l'heritage multiple. Il existe dans CLOS mais d'une maniere differente de c++, il a ete considere que le gain d'expressivite obtenue grace a l'heritage multiple, compense les ambiguites.\\
+En Lisp, on peut reprogrammer l'algorithme de dispatch dynamique.\\
+
+CLOS est implemente en lui-meme, (Meta-objet et 1ere classe).\\
+Le typage est dynamique.\\
+C'est une source d'expressivite en plus.\\
+
+\subsection{Portee de l'inforamtion}
+Il est tres complique quand un objet meurt, de savoir qu'il est mort a cause du garbage collector.\\
+En Lisp, pas d'acces standard, aux slots partages entre les classes.
+
+\subsection{Accessibilite}
+On essaie d'avoir plus d'abstraction, on ne souhaite pas forcement connaitre les details d'implementation.\\
+On a envie d'utiliser des accesseurs (getter/setter) pour que le jour ou l'on souhaite modifier les attributs, on puisse le faire sans impacter le code deja existant.\\
+\subsection{Specificite}
+C'est le fait que le typage soit dynamique, qui fait que beaucoup de chose changent, par rapport au c++ par exemple.\\
+On retrouve des paradigmes semblables en ruby ou python.\\
+
+\subsection{Rappels}
+Copier coller c'est mal, a moins que ca soit de la generation de code.\\
+Revoir aggregation/composition/heritage. Notamment, heritage en LISP.\\
+ 
+
+
+\end{document}
