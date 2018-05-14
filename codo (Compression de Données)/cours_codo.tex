@@ -25,6 +25,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{stmaryrd}
+\usepackage{mathrsfs}
 
 % Links. Should be loaded last.
 \usepackage{hyperref}
@@ -447,73 +448,133 @@ Voir le processus sur les diapos.
 
 C'est utilisé dans GIF.
 
+\section{Conversion analogique-digitale}
 
+\subsection{Un petit exemple}
 
+On prend un fichier audio que l'on ouvre avec Audacity pour voir que le fichier
+ressemble toujours à un entité continue de loin mais discrète de près.
 
+C'est une pression qui dépend de l'espace et du temps.
 
+On considère notre tension avec la varaible $f_a : \R \rightarrow \R$.
 
+Que l'on va discrétiser ainsi: $f_d: \Z \rightarrow \R$.
 
-\section{Old}
+\subsection{Le problème de l'échantillonage}
 
-$$
-Q_{Tot}(S_{i}) = - N_{FP_{i}} Sh
-$$ $$
-Q_Tot(F) = Q_{Tot}(S_{1}) + Q_{Tot}(S_{2}) + ... + Q_{Tot}(S{N_{2}})
-$$ $$
-Q_{Tot}(S_{1}) = -N_{F}log_{2}(P_{i})
-$$ $$
-Q_{Tot}(S_{2}) = -N_{FP_{2}}log_{2}(P_{2})
-$$ $$
-Q_{Tot}(S{N_{2}}) = -N_{F}P_{N}log_{2}(P_{N})
-$$ $$
-Q_{Tot}(F) =  \sum -N_{FP_{i}}
-= -N_{F} \sum P_{i}log_{2}(P_{i}) Sh
-$$
+Voir slides.
 
-Un gros fichier "probable" contient plus d'info qu'un petit fichier "improbable"
-$
-Q_{Tot} $ $\rightarrow$ Sh
+On prend des points $(t_n)_{n \in \Z}$ pour faire la séquence
 
-$\rightarrow$ H $\rightarrow$ Sh/Symbole
-$
-H = - \sum P_{i}log_{2}(P_{i})$ $\rightarrow$ ne depend pas du fichier considere, mais uniquement
-de la distribution de proba des symboles composant le fichier.
+$$(f_d(n) = f_a(t_n))_{n \in \Z}$$
 
+Pour faire simple, on prend des points à un intervalle régulier. On a donc
 
+$$ t_n = nT_e $$
 
-$X$ variable aleatoire de valeur $ \{ x_{1}, x_{2} ... x_{n} $
-$\rightarrow$ $P_{i} = P(X = x) \sum P_{i} = 1$
+$T_e$ : Période d'échantillonage
 
-$
-E[X] = \sum_{i=1}^{N} x_{1} P(X = x_{i}) = \sum_{i = 1}^{N} x_{i} P_{i}
-$ $
-E[\phi (X)] = \sum_{i=1}^{N} \phi (x_{i})P_{i}
-$ $
-H= - \sum_{i= 1}^{N}P_{i}log_{2}P_{i} = \sum_{i = 1}^{N} (-log_{2}(Pi)) P_{i} = \sum_{i = 1}^{N}q_{S_{i} * P_{i}}
-H = E[q(s_{i})]
-$ $
-\sum = {0,1} P(0) = P_{0} = P
-             P(1) = P_{1} = 1 - P
-$ $
-H = -p log_{2}(p) - (1 - p) log_{2}(1 - p)
-  = H(p)
-$
+$f_e = \frac{1}{T_e}$ : Fréquence d'échantillonage
 
----
-Missing things
----
+Il faut la choisir avec soin pour avoir un bon compris taille/qualité.
 
+\subsection{À quelle vitesse un signal varie-t-il?}
 
+On va faire une représentation fréquentielle puisque la représentation
+temporelle ne convient pas. Cette représentation est une \textbf{transformée de
+ Fourier}.
 
-$\sum$ avec$ N $symboles $s_{i}, i = 1, .. N$
-                                 $   (2^{n})$
-$$
-P(S_{i}) = \frac{1}{N_{\sum}} = \frac{1}{ 2^{n}}$$
-$$
-H = - \sum_{i = 1}^{N\sum} log_{2}(P_{i}) = - \sum_{i = 1}^{2^{n}}
-  = -\sum_{i = 1}^{2^{n}} \frac{1}{2^{n}} log_{2} (\frac{1}{ 2_{n}}))
-  = \frac{1}{ 2_{n}} * (-n) * \sum_{i = 1}^{2^{n}} * \sum_{i = 1}^{2^{n}} 1  
-  = n2^{n}2^{-n} = n $$     (Sh/Symbole)
+Elle prend beaucoup moins de place et représente la même information.
+
+Comment y arrive-t-on?
+
+\subsubsection{La transformée en séries de Fourier. [Compléter]}
+
+Elle s'écrit:
+
+$$ c_n = \frac{1}{T} \int_0^T x(t) \e ^{-2 i \pi \frac{n}{T} t} \, \text{d} t $$
+
+Elle s'applique pour des raisons physiques.
+
+\
+
+Prenons un exemple simple:
+
+Soit une fonction carrée de période T:
+
+\[ f(t) =
+\begin{cases}
+  1 &\text{si t} \in [0, \frac{T}{2}] \\
+  0 &\text{si t} \in [\frac{T}{2}}, T]
+\end{cases} \]
+
+\
+
+On a
+
+$$ \tilde{f}  = \frac{1}{2} + \sum^N_{n = 1} $$
+
+\subsubsection{Le produit scalaire}
+
+Voir le poly.
+
+Le produit scalaire $<x, y>$ entre deux éléments $(x, y) \in E \times E$
+
+Dans $E = \R ^2$:
+
+$$<x, y> = ||x|| ||y|| \cos{\theta}$$
+
+Dans $E = \R ^ n$:
+
+\[ x = \left( \begin{matrix} x_1 \\ \vdots \\ x_n \end{matrix} \right) =
+\sum^n_{i = 1} x_i \cdot u_i = \sum^n_{i = 1} \]
+
+Dans $E = \math{L}$:
+
+\subsubsection{Illustration géométrique de la décomposition en série de Fourier}
+
+\subsubsection{La décomposition en série de Fourier}
+
+\begin{align*}
+  f(t) &= \sum^{+ \infty}_{- \infty} c_n \e ^{i 2 \pi \frac{n}{T} t}\\
+       &= a_0 + \sum^{+ \infty}_{n = 1} a_n \cos(2 \pi \frac{n}{T} t) + b_n \cos(2 \pi \frac{n}{T} t)
+\end{align*}
+
+\subsubsection{La transformée de Fourier}
+
+\begin{align*}
+  c_n = \frac{1}{T} \int_0^T f(t) \e ^{-2}
+\end{align*}
+
+On a
+
+$$ \mathcal{F}(f \times g) = \mathcal{F}(f) * \mathcal{F}(g) $$
+
+\subsubsection{Propriétés pratiques du Dirac}
+
+$$f(t) \times \delta(t - t_0) = f(t_0) \times \delta (t - t_0) $$
+
+C'est l'élément neutre du produit de convolution.
+
+$$ f(t) = \delta (t - t_0) = f(t - t_0) $$
+
+Voir le reste sur les diapos.
+
+\subsubsection{Après le peigne de Dirac}
+
+\begin{align*}
+  \tilde{f_d} = f_a \times W_{T_e} (t)
+\end{align*}
+
+\begin{align*}
+  \mathcal{F}(\tilde{f_d}) &= \mathcal{F}(f_a \times W_{T_e}) \\
+                           &= \underbrace{\mathcal{F}(f_a)}_{\tilde{f}_a(u)} \times \mathcal{F}(W_{T_e}) \\
+                           &= 
+\end{align*}
+
+\subsubsection{Effet stroboscopique}
+
 
 
 \end{document}
