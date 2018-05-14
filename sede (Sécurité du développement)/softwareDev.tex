@@ -366,24 +366,141 @@ Make sure that you verify regularly that things can fail.\\
 Netflix had some of the same issues, it was client of AWS.\\
 \url{https://www.lemondeinformatique.fr/actualites/lire-netflix-libere-chaos-monkey-dans-la-jungle-open-source-49940.html}
 
-\section{Trusting code}
-\subsection{Open source}
-If you want people to find bugs in your code, you have to write well documented.\\
-Sometime, people don't look enought.\\
-You still have to be really carefull about your stuff.\\
-Code reviews are a good thing. Being read by pairs is really gainful.\\
+\subsection{More sociology}
 
- 
-One man added a security hole in ssl in python, he was redirecting data to his website.\\ 
+Usually, the finder of the exploit will let in one or two syntax errors. Script
+kiddies catch them and fix them and abuse the thing.
+
+They usually do a rm -rf * at the root of the fs...
+
+Keep the logs outside (on a read-only machine) and make backups frequently.
+
+After all, consider how expensive it is to do them and test themand how
+expensive it is to restart the process.
+
+\section{Trusting code}
+
+\subsection{Open source}
+If you want people to find bugs in your code, you have to write well documented.
+
+Sometime, people don't look enough. ``Many eyeballs fallacy''. They found a
+20-year-old bug in the OpenBSD libc.
+
+You still have to be really carefull about your stuff.
+
+Code reviews are a good thing. Also make the code readable. Being read by pairs
+is really gainful.
+
+Trusting people can be dangerous. Being paranoic is a good thing.
+
+One man added a security hole in ssl in python, he was redirecting data to his
+website. In ssh-decorate. Israeli developer. He detended it wasn't his fault and
+was hacked. He could also be kidding with ourselves. He removed his software.
+
+How to protect ourselves? Checksums.
+
+Be careful when you do things like wget http://truc.com/bidule.html | bash...
+
+Running code inside a docker is not enough. It can probably access network
+things, make some shitty processing...
+
+\subsection{Obstacles}
+
+The systems that give you ``just-in-time'' tarballs. Make releases and huge
+version numbers.
+
+... host them elsewhere.
 
 \subsection{Generated files}
-They can be badly generated, and be source of security holes.\\
-If you are using tools that generate code, you have to give the steps to regenerate files.\\
-Never change by hand generated files, it's a very bad practice.\\
 
-\subsection{ERNO}
-You have to be carefull about erno usage. If you do a syscall between a failed syscall and err(), you will report the syscall you did in the middle.\\
+Typically autoconf and automake.
+
+They can be badly generated, and be source of security holes.
+
+If you are using tools that generate code, you have to give the steps to
+regenerate files.
+
+Never change by hand generated files, it's a very bad practice.
+
+There have already been trojans in the configure files.
+
+It makes it hard to have reliable builds.
+
+We seldom can re-generate the same configure.
+
+Autoconf will compile all it can by default. Do compilation diffs.
+
+\subsection{Guidelines}
+
+Always make it possible to regenerate everything
+
+... so that people may audit stuff
+
+build should not have access network access.
+
+... and probably have network access.
+
+For instance, in OpenBSD, we switched to doing that, and we caught python/ruby
+code accessing the network.
 
 
+... no recent autoconf/automake trojan.
+
+\subsection{Race condition example}
+
+mktemp example: it does not create the file, only returns a valid file NAME.
+
+Every once in a while, you can have conflicts.
+
+You can overwrite config files, etc.
+
+Use counting.
+
+\subsection{Race condition}
+
+Trying to access a shared resouce using non-atomic operations.
+
+/tmp is a common directory
+
+mktemp checks the file does not exist
+
+fopen assumes the file still does not exist.
+
+Use mkstemp instead.
+
+\subsection{Correct use of mkstemp}
+
+* Remove the fd when your code fails.
+
+* errno can change. Save it.
+
+\subsection{Yet another example}
+
+Config file opener:
+
+Use atomic operations. fstat after fopen.
+
+\subsection{Solutions}
+
+Know atomic operations.
+
+Prefer fstat, fchmod, fchown to stat, chmod, chown...
+
+ldconfig example: remove the first part. rename will delete the old files.
+
+\subsection{ERRNO}
+
+You have to be carefull about erno usage. If you do a syscall between a failed
+syscall and err(), you will report the syscall you did in the middle.
+
+\subsection{Yet another}
+
+No errno restauration in a signal handler.
+
+printf works with a buffer. Buffer overflow possible.
+
+Careful with memory allocation in signal handlers.
+
+Never use wait (waitpid is ok).
 
 \end{document}
