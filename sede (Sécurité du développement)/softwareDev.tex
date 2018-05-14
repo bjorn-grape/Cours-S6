@@ -364,4 +364,19 @@ Make sure that you verify regularly that things can fail.\\
 Netflix had some of the same issues, it was client of AWS.\\
 \url{https://www.lemondeinformatique.fr/actualites/lire-netflix-libere-chaos-monkey-dans-la-jungle-open-source-49940.html}
 
+\section{Trusting code}
+\subsection{Open source}
+If you want people to find bugs in your code, you have to write well documented.\\
+Sometime, people don't look enought.\\
+You still have to be really carefull about your stuff.\\
+Code reviews are a good thing. Being read by pairs is really gainful.\\
+
+ 
+One man added a security hole in ssl in python, he was redirecting data to his website.\\ 
+
+\subsection{Generated files}
+They can be badly generated, and be source of security holes.\\
+If you are using tools that generate code, you have to give the steps to regenerate files.\\
+Never change by hand generated files, it's a very bad practice.\\
+
 \end{document}
