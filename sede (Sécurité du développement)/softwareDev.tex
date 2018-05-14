@@ -5,7 +5,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-\usepackage[french]{babel}
+\usepackage[english,french]{babel}
 
 % Defining sane commands for euros.
 \usepackage{textcomp}
@@ -39,8 +39,10 @@
 \author{Marc ESPIE}
 
 \begin{document}
+\selectlanguage{english}
 
 \maketitle
+
 \tableofcontents
 \newpage
 
@@ -378,5 +380,10 @@ One man added a security hole in ssl in python, he was redirecting data to his w
 They can be badly generated, and be source of security holes.\\
 If you are using tools that generate code, you have to give the steps to regenerate files.\\
 Never change by hand generated files, it's a very bad practice.\\
+
+\subsection{ERNO}
+You have to be carefull about erno usage. If you do a syscall between a failed syscall and err(), you will report the syscall you did in the middle.\\
+
+
 
 \end{document}
