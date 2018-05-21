@@ -504,4 +504,37 @@ Careful with memory allocation in signal handlers.
 
 Never use wait (waitpid is ok).
 
+\section{Global states}
+
+Beware of hidden global states.
+
+\subsection{Errno}
+If you want to use it you have to save it somewhere.
+
+\subsection{locales}
+Use  environment independant functions.
+
+\subsection{signals}
+Are they set to something not default ?
+
+\subsection{fd}
+They may be affected by signal.
+
+\subsection{Environment}
+In Unix environment is just an array of strings.\\
+You are not sure that a given variable will occur only once.\\
+
+\subsection{AI technique}
+When you change some pattern bits, you may make an OCR recognize a whole different thing, but it will be the same for human eye.\\
+
+\subsection{checking file access}
+On Unix you only check Opening and Execution.
+Otherwise this is not Unix.\\
+
+
+
+
+
+\subsection{}
+
 \end{document}
