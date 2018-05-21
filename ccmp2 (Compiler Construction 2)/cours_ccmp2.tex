@@ -1,11 +1,44 @@
 \documentclass[a4paper,11pt]{article}
+
+% Standart.
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
+\usepackage[french]{babel}
+
+% Defining sane commands for euros.
+\usepackage{textcomp}
+\newcommand{\euro}{\texteuro}
+
+% Page format.
+\usepackage{geometry}
+\geometry{top=2cm, bottom=2cm, left=1cm, right=1cm}
+
+% Figures.
+\usepackage{graphicx}
+\graphicspath{{resources/}}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz}
+
+% Math and chemistry.
+\usepackage{chemist}
+\usepackage{siunitx}
+\usepackage{numprint}
+
+
+% Links. Should be loaded last.
 \usepackage{hyperref}
+\hypersetup{colorlinks=true,
+            linkcolor=blue,
+            filecolor=magenta,
+            urlcolor=cyan,
+            citecolor=blue}
 
 \title{Compiler Construction (level 2)}
 \author{Étienne Renault}
+\date{May 15, 2018}
+
 
 \begin{document}
 
@@ -143,7 +176,7 @@ labelendAB\\
 \subsection{Blocks}
 Il commece par un label.\\
 Il finit par 1 jump ou cjump.\\
-Il ne possede pas plus d'un label.\\
+Il ne possède pas plus d'un label.\\
 
 \
 
@@ -152,12 +185,21 @@ On recupere les blocks de base, et on les reorganise.\\
 Ainsi la logique du programme est conservee.\\
 
 \subsection{Difference processeur Cisc et Risq }
-Cisc : Assembleur tres riche, plus de 100 instructions, mais entre 6 et 12 registres.\\
+Cisc : Assembleur très riche, plus de 100 instructions, mais entre 6 et 12 registres.\\
 Risq : Assembleur pauvre mais beaucoup de registres.\\
 
+\subsection{Interference Graph coloration}
 
+One makes a pile starting from a node that has fewer arêtes than the max color
+count.
 
+When one colors the children of a node, one wants to use the same register as
+much as possible.
 
+Build -> Simplify -> Select.
 
+\subsection{Spilling}
+
+Temporaries don't use fewer registers but free them faster.
 
 \end{document}
