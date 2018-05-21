@@ -47,6 +47,9 @@
 \newcommand{\der}{\,\mathrm{d}}
 \newcommand{\e}{\mathrm{e}}
 \newcommand{\ti}{\cdot}
+\newcommand{\ls}{\begin{itemize}}
+\newcommand{\li}{\item}
+\newcommand{\lend}{\end{itemize}}
 
 \title{Compression}
 \author{Guillaume TOCHON}
@@ -563,6 +566,8 @@ Voir le reste sur les diapos.
 
 \subsubsection{Après le peigne de Dirac}
 
+Prendre la bonne notation pour le peigne de Dirac: replacer les W par le peigne.
+
 \begin{align*}
   \tilde{f_d} = f_a \times W_{T_e} (t)
 \end{align*}
@@ -575,6 +580,99 @@ Voir le reste sur les diapos.
 
 \subsubsection{Effet stroboscopique}
 
+C'est ce qui se passe quand la fréquence du signal est trop proche de celle
+d'échantillonnage.
 
+\section{La compression non-conservative}
+
+\subsection{Introduction}
+
+Le bruit des enregistrements de phénomènes physiques (son, image, etc.) pose
+problème aux algorithmes conservatifs (contrairement aux iamges de sythèse).
+
+Huffman ne fonctionne pas car l'entropie d'une image est grande. Ex: Entropie de
+7.427 pour une image encodée sur 8 bits...
+
+JPEG stocke une ligne puis la différence entre cette ligne et la suivante.
+
+On doit faire un compromis entre taux de compression et qualité de
+reconstruction.
+
+\subsection{A first naïve approach}
+
+\subsubsection{Downsampling}
+
+On réduit la taille de l'image. C'est super efficace!
+
+Techniques:
+\ls
+\li Nearest-neighbor interpolation. (on réplique les valeurs de partout).
+\li Bilinear: On prend la moyenne des voisins. Rend mieux mais avec du flou.
+\lend
+
+\
+
+Métriques de qualité:
+
+\ls
+\li $RMSE(\epsilon)$ Écart-type (plus ou moins) de l'image. À maximiser.
+\li $SNR(\epsilon)$ Rapport signal-bruit. À minimiser.
+\lend
+
+On considère généralement qu'à partir d'un SNR de 25 dB, on a une bonne qualité.
+
+\subsubsection{Frequency decomposition of an image}
+
+On veut supprimer la partie haut fréquence sans perdre les information basse
+fréquence (qui donnent les détails).
+
+Le processus typique est de changer d'espace pour appliquer des compressions
+puis on retourne dans l'espace d'origine avec une transformée inverse.
+
+\subsubsection{Spacial representation}
+
+\subsubsection{Change the representation domain}
+
+Il s'agit de faire un changement de base dans un espace vectoriel de
+mathématiques.
+
+\
+
+Soient
+
+\begin{align*}
+  I = \alpha B_{00} + \beta B_{01} + \gamma B_{10} + \delta B_{11} \\
+\end{align*}
+\begin{equation}
+  \[
+  \begin{pmatrix}
+    200 & 150 \\
+    50 & 100
+  \end{pmatrix} =
+  \alpha \begin{pmatrix}
+    200 & 150 \\
+    50 & 100
+  \end{pmatrix} +
+  \beta \begin{pmatrix}
+    200 & 150 \\
+    50 & 100
+  \end{pmatrix} +
+  \gamma \begin{pmatrix}
+    200 & 150 \\
+    50 & 100
+  \end{pmatrix} +
+  \delta \begin{pmatrix}
+    200 & 150 \\
+    50 & 100
+  \end{pmatrix}
+  \]
+\end{equation}
+
+\subsubsection{The walsh-Hadamard transform}
+
+Elle n'est plus employée de nos jours mais utilisée par les russes dans une
+sonde de la Lune.
+
+Elle recommence à être utilisée dans l'informatique quantique.
 
 \end{document}
