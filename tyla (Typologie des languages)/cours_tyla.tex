@@ -546,6 +546,65 @@ Pour lui, un bon langage doit avoir ces caractéristiques:
 
 \end{itemize}
 
+\subsection{(N)RVO Return value optimization}
+
+C++
+
+g()
+
+std::vector<int> res;
+
+return res;
+
+Le compilateur ne va pas appeler le constructeur par copie pour des raisons de
+performance.
+
+\
+
+En revanche, Ada fait des copies à l'appel et au retour. C'est du ``value
+result''.
+
+\subsection{Call by name}
+
+On remplace toutes les occurrences des variables par les paramètres de l'appel.
+
+Plus personne le fait: on a les template, maintenant.
+
+\subsection{Default parameters}
+
+Introduit par Ada.
+
+\subsection{Subprograms as arguments}
+
+C++ : lambda, std::function
+
+C: pointer on function
+
+\subsection{Conclusion}
+
+Lire Conception et programmation objet.
+
+Il parle d'Eiffel.
+
+\section{Technologie objet Eiffel}
+
+Bertrand Mayer (MIT)
+
+\subsection{Introduction}
+
+Il y a des classes et des objets.
+
+Closes d'adaptation d'héritage.
+
+\subsection{Des concepts originaux}
+
+Programmation contractuelle.
+
+3 modes de dévelopement (Optimisation, Débug, Production).
+
+\subsection{Les objets}
+
+
 
 
 
