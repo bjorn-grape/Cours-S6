@@ -543,6 +543,10 @@ Never use wait (waitpid is ok).
 
   \
 
+  More generally, try to avoid localized functions when you can.
+
+  \
+
 \item blocking status of fd
 
   Signal handlers: Are they set to something non-default?
@@ -578,6 +582,10 @@ Never use wait (waitpid is ok).
 
 \subsection{Environement}
 
+It's just an array of strings.
+
+\
+
 Holds PATH, TERM, TERMCAP. May hold the same variable twice!
 
 PATH: add sbin when the program is admin.
@@ -588,13 +596,14 @@ TERMCAP
 
 Gen own environment if we want to be secure.
 
-\subsection{Security in Big Data}
+\subsection{Security in Big Data and AI}
 
 \url{https://nicholas.carlini.com/}
 
 \
 
-Changes the behaviour of a machine learning algorithm by changing a few bits.
+Changes the behaviour of a machine learning algorithm by changing a few bits
+that aren't perceived by the human eye.
 
 Or emitting inaudible sounds.
 
@@ -662,15 +671,15 @@ free works just fine on NULL pointers. Simplify tests.
 
 \subsection{The Unix security model}
 
-In unix, when od you check that you can access a file:
+In unix, when should you check that you can access a file:
 
 At open: YES
 
 At read/write: NO
 
-At exec: NO
+At exec: NO (OR YES?!? To be confirmed)
 
-Exception: In tty, revoke to close all the fds of a program.
+Exception: In tty, revoke() to close all the fds of a program.
 
 \subsubsection{I am root}
 
@@ -688,7 +697,5 @@ Plus every fd I own.
 
 If you need to get some fds reserved to root, start life as root then
 change your priviledges as soon as you can.
-
-
 
 \end{document}

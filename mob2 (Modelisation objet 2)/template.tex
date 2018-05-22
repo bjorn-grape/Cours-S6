@@ -57,8 +57,6 @@ CLOS : Common Lisp Object System\\
 Typage dynamique + multimethodes.\\
 Il est implemenete en lui meme $\rightarrow$ homoicomicite du langage.\\
 La couche oriente objet de CLOS est implemente en lui meme.\\
-
-
 \subsection{Origine}
 Small talk est le langage oriente objet dans l'idee.\\
 l'origine de CLOS a la meme origine. Lisp etait presque uniquement utilise dans les labos.\\
@@ -93,6 +91,27 @@ On retrouve des paradigmes semblables en ruby ou python.\\
 Copier coller c'est mal, a moins que ca soit de la generation de code.\\
 Revoir aggregation/composition/heritage. Notamment, heritage en LISP.\\
  
+\section{Ambivalence de l'heritage}
+On herite de l'interface et de l'implementation.\\
+Heriter de la structure et du comportement n'est pas toujours ce que l'on souhaite.\\
+
+\subsection{Polymorphisme}
+\begin{itemize}
+  \item overload (surcharge) : changer signature des methodes
+  \item override (reecriture) : changer corps de fonction
+  \item (masquage) : methode en cache une autre non virtuelle
+\end{itemize}
+
+Au sens de CLOS, une methode n'est pas executable en tant que tel, il faut
+faire appel a la classe parente pour qu'elle specialise l'appel.\\
+
+\subsection{Contravariance/Covariance}
+\begin{itemize}
+  \item Contravariance :  Vous permet d'utiliser un type plus générique (moins dérivé) que celui spécifié à l'origine.
+  \item Covariance : Vous permet d'utiliser un type plus dérivé que celui spécifié à l'origine. 
+\end{itemize}
+
+100\% des cas de figure de covariance/contravariance sont implementables en CLISP.
 
 
 \end{document}
