@@ -33,7 +33,9 @@
             urlcolor=cyan,
             citecolor=blue}
 
-
+\newcommand{\ls}{\begin{itemize}}
+\newcommand{\li}{\item}
+\newcommand{\lend}{\end{itemize}}
 
 \title{Software Development Security}
 \author{Marc ESPIE}
@@ -503,5 +505,190 @@ printf works with a buffer. Buffer overflow possible.
 Careful with memory allocation in signal handlers.
 
 Never use wait (waitpid is ok).
+
+\subsection{Beware of hidden global state}
+
+\begin{itemize}
+\item Errno
+
+  Use strerror and errc where you can pass them the value we want. if we use
+  errno, we have to save it.
+
+  \
+
+\item Locales
+
+  If we don't use setlocale, we're in the default ``C'' locale. Multithreaded
+  programs are more complex (uselocale(3) is a bitch).
+
+  Locale affect:
+  \begin{itemize}
+  \item most isXXXXX functions (encoding). Ex: isalpha.
+  \item printf and scanf
+  \item NOT strcmp
+  \item loaded code.
+  \end{itemize}
+
+  Faire la distrinction entre les fichiers système et user-facing.
+
+  Voir sur localedef pour faire de l'ordre alphabétique...
+
+  Chargement dynamique de code aussi: dlopen...
+
+  \
+
+  Section critique:
+
+  Endroit dans le code où on fixe le comportement.
+
+  \
+
+\item blocking status of fd
+
+  Signal handlers: Are they set to something non-default?
+
+  Does something need them?
+
+  Will they create extra errors?
+
+  Ex: SIGCHILD: if not caught, can't receive signals.
+
+  SIGIGNORE can do stuff.
+
+  \
+
+  File descriptors:
+
+  SIGPIPE difficult: Default behaviour: program killed.
+
+  SIGPIPE -> EPIPE -> EINTR
+
+  Do a basic signal handler but do nothing about it.
+
+  Comportement process par process obligatoire.
+
+  Si signal pendant syscall bloquant, passage par le gestionnaire de signal.
+
+  On peut changer ça avec sigaction.
+
+  \
+
+\item hidden children
+\end{itemize}
+
+\subsection{Environement}
+
+Holds PATH, TERM, TERMCAP. May hold the same variable twice!
+
+PATH: add sbin when the program is admin.
+
+TERM can execute code. Thousands of possible values.
+
+TERMCAP
+
+Gen own environment if we want to be secure.
+
+\subsection{Security in Big Data}
+
+\url{https://nicholas.carlini.com/}
+
+\
+
+Changes the behaviour of a machine learning algorithm by changing a few bits.
+
+Or emitting inaudible sounds.
+
+Licence plate consequences.
+
+\
+
+Breaking modern defences against ROP (return-oriented programming).
+
+It's a protection against buffer overflows. He found some instructions that
+behave as nop.
+
+\
+
+Evaluation of Chrome Extension security architecture.
+
+\subsection{mktemp}
+
+BSD and dietlibc return NULL pointer on error.
+
+\subsection{Error checking is hard.}
+
+Hard to test.
+
+\subsection{Portability}
+
+Check the results:
+
+\ls
+\li Preprocessor
+\li unifdef
+\li nm on .o file
+\lend
+
+\subsection{He/She said}
+
+Beware of behavioural differences:
+
+\ls
+\li Nature of char arrays (terminated, not terminated)
+\li encoding (utf-8, ascii, locale again)
+\li descriptor vs FILE (NULL vs -1)
+\li zeroing memory (allocators and OSes)
+\li empty strings vs NULL pointers.
+\lend
+
+\subsection{If you don't have code, you don't have bugs}
+
+\ls
+\li Code that isn't tested is buggy
+\li ... so don't write code!
+\li simplify error handling
+\li don't write code for conditions you can't test
+\li Group error handling
+\li Still ``fail closed''.
+\lend
+
+\subsection{I'm with stupid}
+
+free works just fine on NULL pointers. Simplify tests.
+
+\subsection{Network}
+
+``Be specific in what you receive''.
+
+\subsection{The Unix security model}
+
+In unix, when od you check that you can access a file:
+
+At open: YES
+
+At read/write: NO
+
+At exec: NO
+
+Exception: In tty, revoke to close all the fds of a program.
+
+\subsubsection{I am root}
+
+We ignore the rights.
+
+So open the file first, check later (with fstat).
+
+\subsection{What rights do I have?}
+
+I have the rights of the process
+
+Plus every fd I own.
+
+\subsection{Priv Drop}
+
+If you need to get some fds reserved to root, start life as root then
+change your priviledges as soon as you can.
+
+
 
 \end{document}
