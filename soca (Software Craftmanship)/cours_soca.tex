@@ -1,0 +1,490 @@
+\documentclass[a4paper,11pt]{article}
+
+% Standart.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage{eurosym}
+
+% Page format.
+\usepackage{geometry}
+\geometry{top=2cm, bottom=2cm, left=1cm, right=1cm}
+
+% Figures.
+\usepackage{graphicx}
+\graphicspath{{resources/}}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz}
+
+% Math and chemistry.
+\usepackage{chemist}
+\usepackage{siunitx}
+\usepackage{numprint}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+
+% Links. Should be loaded last.
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+  citecolor=blue}
+
+
+% Dummy environment. Useful for some convoluted layouts.
+\newenvironment*{dummyenv}{}{}
+
+% Custom commands
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\der}{\,\mathrm{d}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ti}{\cdot}
+
+\newcommand{\ls}{\begin{itemize}}
+\newcommand{\li}{\item}
+\newcommand{\lend}{\end{itemize}}
+
+\title{Software Craftmanship}
+\author{Emmanuel Chaffraix}
+\date{25 avril 2018}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+\section{Soutenance}
+
+Le 3 juillet.
+
+Soutenance: 10min sur un sujet donné par le prof
+
+10min de restitution de cours.
+
+Par groupe de 3.
+
+\section{Introduction}
+
+\subsection{Prof}
+
+Ex-GISTR 2009.
+
+\subsection{Iceberg}
+
+La tech n'est que la partie émergée de l'iceberg.
+
+SLA: qualité de service. (uptime, etc)
+
+\section{Clean code}
+
+\subsection{Qu'es-ce que du clean code?}
+
+\begin{itemize}
+\item Bugs
+\item Coding style
+\item Travailler avec les autres (50, 100, 1000 personnes)
+\end{itemize}
+
+\subsection{La vie du développeur}
+
+Jamais remercié, toujours des plaintes!
+
+\
+
+Par code:
+
+\begin{itemize}
+
+\item Fail compilation
+
+\item Segfault
+
+\item Stack overflow
+
+\end{itemize}
+
+\
+
+Client:
+
+\begin{itemize}
+
+\item ASAP
+
+\item Bad UX
+
+\item Not working.
+
+\end{itemize}
+
+\subsection{... est géniale}
+
+On créé des produits
+
+On décrouvre des activités
+
+On apprend!
+
+\subsection{Software Craftmanship Manifesto}
+
+Pas seulement du logiciel qui marche, mais aussi du logiciel bien conçu.
+
+Pas seulement répondre à du changement mais ajouter constemment de la valeur
+
+Pas seulement des individus et des interactions mais une communauté de
+professionnels
+
+Pas seulement une collaboration avec des clients, mais aussi des partenariats
+productifs.
+
+\subsection{Exemple}
+
+Éviter les nombres magiques, la duplication de code, les abbréviations
+non-évidentes. Prendre des noms clairs.
+
+Quelle unité? \euro? £? \$?
+
+C'est de la dette technique.
+
+\subsection{L'impact de la dette technique}
+
+Lisibilité du code.
+
+Développement de nouvelles fonctionnalités.
+
+Correction de bugs.
+
+\
+
+C'est finalement le calcul de son impact en tant que développeur sur un projet.
+
+\subsection{Quelques principes généraux}
+\subsubsection{Be KISS}
+
+Keep It Simple, Stupid.
+
+Exemple: Le bon coin. Très peu de fonctionnalités.
+
+\subsubsection{Be DRY}
+
+Don't repeat yourself.
+
+Pas de code similaire.
+
+\subsubsection{Be focused}
+
+YAGNI: You Ain't Gonna Need It.
+
+Ne pas développer des trucs qu'on ne va pas utiliser.
+
+\subsubsection{DIE}
+
+Duplication Is Evil.
+
+Copy/Paste is easy, but hard to bug fix.
+
+\subsection{Quelques principes OO}
+
+Encapsulation
+
+Héritage
+
+Polymorphisme
+
+\begin{itemize}
+\item Overloading
+\item Templates
+\item Subtypings
+\end{itemize}
+
+Liste: souvent tableaux mais avec des éléments de liste chaînée.
+
+\subsubsection{SOLID}
+
+\begin{itemize}
+\item SRP: Single responsibility principle
+
+  Une classe ne doit avoir qu'une seule raison de changer.
+
+  Ne vérifier un email qu'à un seul endroit, par exemple.
+
+  Séparer les actions effectuées par une fonction.
+
+  \
+\item OCP: Open/closed principle
+
+  Les entités logicielles doivent être ouvertes à l'extension mais fermées à la
+  modification.
+
+  Exemple: gros switch case à modifier.
+
+  Solution: stocker le résultat dans chacune des classes.
+
+  \
+
+\item LSP: Liskov substitution
+
+  Si S est un sous-type de T, alors les objets de type T peuvent être remplacés
+  par des objets de type S sans changer aucune des propriétés désirables du
+  programme.
+
+  Si on manipule les types, on n'utilise pas bien son langage OO.
+
+  \
+
+\item ISP: Interface Segregation Principle
+
+  Many client-specific interfaces are better than one general-purpose interface.
+
+  \
+
+\item DIP: Dependency Injection Principle
+
+  One should ``depend upon abstractions, not concretions''.
+
+  On ne doit dépendre que des abstractions de classes, pas des classes
+  elles-mêmes.
+
+  Exemple: Si on a un loggeur partout, faire une interface qui permet de tout
+  changer facilement.
+
+\end{itemize}
+
+\section{Soyez Agiles}
+
+\subsection{V Cycle}
+
+Compléter.
+
+Niveau fonctionnel: Concept development \quad Transition Operation & maintenance.
+
+Niveau system: Requirements Engineering. \quad Test & evaluation
+
+Niveau Subssytem
+
+Bien pour les projets longs où on a besoin de s'engager sur un résultat.
+
+\subsection{Agile}
+
+Meilleure satisfaction client: il a quelque chose d'utilisable tout le long.
+
+Voir \url{https://www.youtube.com/watch?v=3wyd6J3yjcs}.
+
+Voir les diapos.
+
+Idea $\underset{Build}{\longrightarrow}$ Product $\underset{Measure}
+{\longrightarrow}$ Data $\underset{Learn}{\longrightarrow}$ Idea.
+
+Voir l'entreprise qui répondait à des questions ouvertes en 2007, rachetée par
+Google. Ils ont complètement faké le truc: Mail, gestion de ticket, moteur de
+recherche sur les questions et mail sinon. Ils n'ont pas eu le temps de finir
+leur algo.
+
+Financement de Critéo avec de la vente de céréales.
+
+Méthode: Existe depuis les années 60 avec Ford et Toyota.
+
+Méthode lean.
+
+\subsection{SCRUM}
+
+\begin{itemize}
+
+\item Product owner
+
+  Doit pouvoir lister les fonctionnalités qu'il souhaite et comprendre les
+  besoins du client.
+
+  \
+
+\item Scrum master
+
+  Est responsable de l'équipe (souvent un dev). Change régulièrement. Pas
+  forcément le chef.
+
+  \
+
+\item Developer team
+
+  \
+
+\item Backlog
+
+  Do to list sur le projet. Ne fait que grossir. C'est tout ce que souhaite le
+  client.
+
+  \
+
+\end{itemize}
+
+Poker planning: on met un prix / complexité sur chacune des fonctionnalités et
+on discute de quand on les implémente.
+
+\subsubsection{SCRUM Workflow}
+
+\begin{itemize}
+\item Sprint meeting planning
+
+  Remplir le backlog. On chosit ce qu'on va implémenter.
+
+  \
+
+\item Daily Scrum meeting
+
+  Une fois par jour, état de l'avancement du projet, debout.
+  On dit ce qu'on a fait, ce qu'on va faire et là où on bloque.
+
+  \
+
+\item Sprint retrospective
+
+  Voilà ce qu'on a fait par rapport à ce qu'on avait prévu.
+\end{itemize}
+
+\subsubsection{Scrum diagram}
+
+Voir le diagramme sur les déiapos du prof.
+
+\subsection{Kanban}
+
+Voir le diagramme.
+
+Chacun a une couleur de ticket.
+
+Intérêt: on limite le nombre de tickets par personne et par colonne.
+
+\section{Think test}
+
+\subsection{Intro}
+
+TDD: Test driven approach
+
+BDD: Behaviour driven approach
+
+\subsection{Why do we test?}
+
+Tests help to understand requirements
+
+Tests pretoects future developements
+
+Tests are a fall protection
+
+We are human after all.
+
+\subsection{How do we test?}
+
+\textbf{We create code to test our code}
+
+\
+
+\begin{itemize}
+
+\item Unit test: Focus on ONE function usage, mock dependencies. Ex: base de
+  données: on en prend une fausse.
+
+  Developer.
+
+\item Integration test: crosses the boudnary between components.
+
+  Developer.
+
+\item Behaviour test: An example of the user using the system. Test a usecase
+
+  Scrum master + product owner.
+
+\end{itemize}
+
+\subsection{TDD: Test Driven Development}
+
+No code without a test.
+
+\begin{enumerate}
+\item Write a test that fails
+\item Write the code that fulfills the test.
+\item Refactor source code (feature and test !)
+\end{enumerate}
+
+Compliqué à mettre en place pour les personnes qui ne sont pas habituées à faire
+du test.
+
+Ralentit le développement.
+
+\subsection{BDD: Behaviour Driven Development}
+
+A simple test: Given... When... Then...
+
+\textbf{Given} a user with an account
+
+\textbf{When} he tries to create a new account with existing account credentials
+
+\textbf{Then} it must be logged in with the existing account
+
+A feature contains tests.
+
+Voir \url{https://cucumber.io/}
+
+\subsection{Think test}
+
+Write a failing feature test
+
+\subsection{The double loop}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width = 0.6 \textwidth]{bdd-and-tdd-cycle.png}
+  \caption{The double loop}
+\end{figure}
+
+\subsection{Test pyramid}
+
+UI > Service > Unit.
+
+In time and money.
+
+\subsection{What is a good test?}
+
+Easy to understand, clear when fails.
+
+Determinist
+
+Focused
+
+AAA: Arrange, Act, Assert.
+
+\subsection{Test coverage}
+
+A 100\% coverage is not a bug-free code.
+
+\section{From dev to prod}
+
+\subsection{Working with others}
+
+Avoid:
+
+\ls
+\li Missing code files
+\li Ugly code naming
+\li Code deletion
+\lend
+
+Anticipate problems
+
+So rules are required!
+\ls
+\li Coding style
+\li Code reviewal
+\li Automated process
+\lend
+
+Infinite loop: Code, Build, Test, Release, Deploy, Operate, Measure, Plan.
+
+\end{document}
