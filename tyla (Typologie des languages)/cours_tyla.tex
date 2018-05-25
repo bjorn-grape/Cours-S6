@@ -610,9 +610,21 @@ Programmation contractuelle.
 
 3 modes de dévelopement (Optimisation, Débug, Production).
 
-\subsection{Les objets}
+\subsection{Heritage}
 
+Smalltalk, Java et Ada n'implementent pas l'heritage multiple.\\
+Eiffel propose de renommer les primitives dont on herite. On peut changer la visibilite de ce qu'on herite.\\
 
+Revoir covariance/contravariance des types de retour/arguments.\\
+
+\section{Garbage Collector}
+Introduit par LISP avec Mc Carthy.\\
+
+Types de GC:\\
+\begin{itemize}
+  \item Reference counter : Probleme reference cyclique
+  \item Mark and sweep : resolution probleme cyclique, mais creation et deletion O(n)
+\end{itemize}
 
 
 
