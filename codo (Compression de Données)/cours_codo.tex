@@ -675,6 +675,50 @@ sonde de la Lune.
 
 Elle recommence à être utilisée dans l'informatique quantique.
 
+\subsection{JPEG compression algorithm}
+
+\begin{enumerate}
+
+\item Block splitting. Divided into $8 \times 8$ macro-blocks.
+
+Black pixels are added if the image is not a multiple of 8. Inconvenient: HF
+crap.
+
+\
+
+Or the border pixels can be replicated. This reduces the artifacts (not all of them).
+
+\item Calculate the rounded DCT - 128.
+
+  \
+
+\item Quantification de la matrice de DCT.
+
+  \
+
+\item Arrange the values to store them in a zigzag pattern and store that with
+  Huffman.
+
+  $$ coef - 3 \rightarrow \text{réparti en catégories}$$
+
+  $$ cat(#0, amplitude)$$
+
+  $$ -3 \in \underbrace{cat(0, 2)}_{0100} \quad \underbrace{-3}_{00}, \underbrace{-2}_{01}, \underbrace{2}_{10}, \underbrace{3}_{11}, $$
+
+  $$ \text{Or } 3 \in \underbrace{cat(1, 2)}_{1110a1}$$
+
+\end{enumerate}
+
+\
+
+\subsubsection{Artifacts}
+
+Mosaic effect
+
+Ringing on sharp edges. (This is why text looks shitty with JPEG).
+
+\subsection{JPEG compression algorithm: in color}
+
 
 
 \end{document}
