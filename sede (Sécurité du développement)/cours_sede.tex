@@ -698,4 +698,20 @@ Plus every fd I own.
 If you need to get some fds reserved to root, start life as root then
 change your priviledges as soon as you can.
 
+
+\section{Privilege Drop}
+If a program that opens a file is buggy, and doesn't close a fd, any of its children can access to it.\\
+Add this this to open "O_CLOEXE"\\
+
+SetUid can change your identity, but you can get back to it at anytime, this should not be used to drop priviledges.\\
+By default the effective code loaded in memory for several program is readomly.
+
+\subsection{Design}
+When designing a system you a the concept of a role.\\
+For example a role could be to receive and parse mails.\\
+
+You have to decide who can do what.\\
+Trust as less as you can complex code.\\
+
+ 
 \end{document}
