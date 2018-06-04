@@ -1,0 +1,87 @@
+\documentclass[a4paper,11pt]{article}
+
+% Standart.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+
+% Defining sane commands for euros.
+\usepackage{textcomp}
+\newcommand{\euro}{\texteuro}
+
+% Page format.
+\usepackage{geometry}
+\geometry{top=2cm, bottom=2cm, left=1cm, right=1cm}
+
+% Figures.
+\usepackage{graphicx}
+\graphicspath{{resources/}}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz}
+
+% Math and chemistry.
+\usepackage{chemist}
+\usepackage{siunitx}
+\usepackage{numprint}
+
+
+% Links. Should be loaded last.
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+            linkcolor=blue,
+            filecolor=magenta,
+            urlcolor=cyan,
+            citecolor=blue}
+
+\title{}
+\author{Bashar DUDIN}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Infos}
+You can get many infos there.
+\url{https://github.com/bashardudin/GraphsAndFlows}
+
+\section{Recap}
+\paragraph{shortest path}
+\begin{itemize}
+  \item single-pair (svg dst) shortest path problem
+  \item single src any destination : shortest path problem
+  \item Any pair shortcut path pb
+\end{itemize}
+
+\paragraph{algos}
+\begin{itemize}
+  \item Bellman-Ford [general no negative valued edges]
+  \item Dijkstra [positive weights]
+  \item Bellman  [no cycles]
+  \item Floyd warshall 
+\end{itemize}
+
+
+
+\subsection{Safest path}
+% insert image here
+Aim : safest path along which to go.
+
+\
+
+To use shortest paths algorithms for it  is about apllying shortest paths to graphs having  -log(above weights).
+
+\subsection{Finding paths}
+To find critical paths going back from ending point you look for predecessors whose earliest starting date  is earliest starting point 'E' - time task takes. And you go through recursively.
+
+\paragraph{margins} \hfill \break
+It is the difference between earliest starting date of task and the latest (not delaying project).
+
+\paragraph{free margin} \hfill \break
+Is the difference between earliest starting date \& latest one not modifying the earliest starting date of any successors.\\
+
+
+\end{document}

@@ -782,4 +782,20 @@ fds are limited in amount per process. Careful with DDoS attacks.
 
 Do several passes.
 
+\section{Privilege Drop}
+If a program that opens a file is buggy, and doesn't close a fd, any of its children can access to it.\\
+Add this this to open "O_CLOEXE"\\
+
+SetUid can change your identity, but you can get back to it at anytime, this should not be used to drop priviledges.\\
+By default the effective code loaded in memory for several program is readomly.
+
+\subsection{Design}
+When designing a system you a the concept of a role.\\
+For example a role could be to receive and parse mails.\\
+
+You have to decide who can do what.\\
+Trust as less as you can complex code.\\
+
+ 
+>>>>>>> e85a388e03bf31c3003b68c35a03becc04318be5
 \end{document}
