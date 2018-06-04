@@ -83,5 +83,23 @@ It is the difference between earliest starting date of task and the latest (not 
 \paragraph{free margin} \hfill \break
 Is the difference between earliest starting date \& latest one not modifying the earliest starting date of any successors.\\
 
+\subsection{A bit of formalism}
+
+Let $ c : R_+$ be the capacity in a given graph $G$  (having s anf t)\\
+Then a flow on $G$ is a function $f:A \rightarrow R_+$\\
+Satisfying :
+(1) $\forall a \in A m f(a) <=  c(a) $\\
+(2) $\forall i \in V|\{s,t\}$ :\\
+$\sum f(a) = \sum f(a)$\\
+$a \rightarrow v \quad \quad v \rightarrow a$\\
+$ a \in A \quad \quad a \in A$\\
+\\
+
+\subsection{Exercice 6 (exercise sheet)}
+1)\\
+\includegraphics[width = 18cm]{graph_first.png}
+2)
+Simply apply "improving path" algo and you're done.
+
 
 \end{document}

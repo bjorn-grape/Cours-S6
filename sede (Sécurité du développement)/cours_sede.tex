@@ -778,13 +778,18 @@ Used for fastCGI (in werb servers).
 
 fds are limited in amount per process. Careful with DDoS attacks.
 
-\section{Auditing code}
+\subsection{Auditing code}
 
 Do several passes.
 
 \section{Privilege Drop}
-If a program that opens a file is buggy, and doesn't close a fd, any of its children can access to it.\\
-Add this this to open "O_CLOEXE"\\
+If a program that opens a file is buggy, and doesn't close a fd, any of its children can access to it.
+
+\
+
+Add this this to open \texttt{O\_CLOEXE}
+
+\
 
 SetUid can change your identity, but you can get back to it at anytime, this should not be used to drop priviledges.\\
 By default the effective code loaded in memory for several program is readomly.
@@ -796,6 +801,20 @@ For example a role could be to receive and parse mails.\\
 You have to decide who can do what.\\
 Trust as less as you can complex code.\\
 
+\section{Cross site scripting}
+
+ Beware of people inserting \texttt{<script> some .js code </script>} in your database.\\
+ They might stole your credentials.\\
  
->>>>>>> e85a388e03bf31c3003b68c35a03becc04318be5
+
+  2 types of attacks:
+ \begin{itemize}
+   \item  store script in database.
+   \item  try to do some request by stealing the cookies of a user.
+ \end{itemize}
+
+
+
+ 
+
 \end{document}
