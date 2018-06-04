@@ -698,4 +698,88 @@ Plus every fd I own.
 If you need to get some fds reserved to root, start life as root then
 change your priviledges as soon as you can.
 
+\subsection{Too much}
+
+closefrom(3), BSD-only.
+
+Solution portable: O\_CLOEXE. C'est un flag qui devrait être activé par défaut.
+Toujours le mettre quand on fait des pipes, des ouvertures de fichiers, etc...
+
+Intéressant de vérifier si le flag est activé par défaut dans les langages de
+script modernes.
+
+\subsection{Dropping priviledges, the fine print}
+
+\begin{enumerate}
+\li Set supplementary groups using setgroups.
+\li Set your group id using setgid. \textbf{THE ORDER WITH THE NEXT ONE MATTERS !}
+\li Set your user id using setuid
+\li (You can check your code by inking system(``id''))
+\end{enumerate}
+
+\
+
+Beware of Linux:
+
+Make sure you verify setuid/setgid did work (capabilities). This broke sendmail
+btw)
+
+\subsection{What about setuid ?}
+
+Effective id: The one that is checked when someone wants to do something.
+
+Real id: What traces you from the beginning.
+
+The man pages from all the setuids, guid, etc. are well written.
+
+Beware of the difference between setuid and set\textbf{e}uid.
+
+\subsection{More advice}
+
+Threading is not all that safe. Secure its accesses.
+
+``Nobody'' user: Only for NFS. DO NOT USE IT FOR ANYTHING ELSE. To map the files
+who belong to a user that does not exist in the client or when the file belonged
+to root.
+
+\subsection{The root paradox}
+
+Some programs are safer to run as root. Starting as root allows you to change
+identity, starting as lambda does not. It's a weakness of UNIX.
+
+\subsection{Designing software}
+
+A legal obligation if you want to be RGPD-compliant: you can't disappear from a
+websiteif you don't.
+
+You have to do that from the start.
+
+Work in layers.
+
+* Check that there aren't forbidden characters.
+
+* Then work on finer checks.
+
+This limits noise for audits.
+
+\
+
+Put up trust barriers.
+
+Ex: A compiler is done in layers.
+
+\subsection{Example: The X window server}
+
+Graphics cards have DMA access. Huge security breach.
+
+\subsection{fd passing}
+
+Used for fastCGI (in werb servers).
+
+fds are limited in amount per process. Careful with DDoS attacks.
+
+\section{Auditing code}
+
+Do several passes.
+
 \end{document}
