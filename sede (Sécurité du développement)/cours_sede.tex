@@ -803,18 +803,33 @@ Trust as less as you can complex code.\\
 
 \section{Cross site scripting}
 
- Beware of people inserting \texttt{<script> some .js code </script>} in your database.\\
- They might stole your credentials.\\
- 
+Beware of people inserting \texttt{<script> some .js code </script>} in your database.\\
+They might steal your credentials.\\
 
-  2 types of attacks:
- \begin{itemize}
-   \item  store script in database.
-   \item  try to do some request by stealing the cookies of a user.
- \end{itemize}
+2 types of attacks:
+\begin{itemize}
+  \item  store script in database. (Typically through forums and various posts).
+  \item  try to do some request by stealing the cookies of a user.
+\end{itemize}
 
+\
 
+XHTML: Throws up in your face when anything is wrong. \textbf{Always} use it.
 
- 
+\section{Modern mitigation}
+
+\ls
+\li W or X: A memory page is either writable or executable.
+\li ASLR
+\li ROP
+\lend
+
+\section{Audit}
+
+SIGQUIT SIGUP SIGTERM SIGINT
+
+atexit
+
+enums start at 0.
 
 \end{document}
