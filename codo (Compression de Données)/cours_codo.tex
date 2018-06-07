@@ -719,6 +719,22 @@ Ringing on sharp edges. (This is why text looks shitty with JPEG).
 
 \subsection{JPEG compression algorithm: in color}
 
+\subsection{Recap}
+RGB : no that good for compression\\
+LHS : same\\
+YUV : way better : we change their axis (luminance, chrominance, chrominance).
+YUV has more data loss but it compresses the image way more.\\
+"Echantillonnage 4:2:2" : we throw one row out of 2.\\
+"Echantillonnage 4:2:0" : we throw one row out of 2 and one column out of 2.\\
+
+
+\subsection{JPEG steep by step}
+\begin{itemize}
+  \item division in block 8*8
+  \item DCT
+  \item DCT quantification
+  \item Zigzag + huffman
+\end{itemize}
 
 
 \end{document}
